@@ -30,6 +30,15 @@ CreditCard CVV：123 <br>
 
 ## 功能介紹
 
-#### 首頁搜尋
-可以選擇縣市及搜尋關鍵字(根據案名及地址)來尋找合適租屋，都不輸入按找房子則會跳出所有結果
+### 首頁搜尋
+可以選擇縣市及搜尋關鍵字(根據案名及地址)來尋找合適租屋，都不輸入按找房子則會跳出所有結果<br>
 ![Imgur](https://i.imgur.com/HwrYiH6.png)
+<br>
+搜尋頁面可以篩選條件、條件排序，點選查看詳情可以看該房屋的詳情
+<br>
+![Imgur](https://i.imgur.com/gi2zXaS.png)
+<br>
+房屋詳情頁面可以查看有關該房屋的詳細資料，房客轉到最下方可以預約該房子的看屋時間
+<br>
+![Imgur](https://i.imgur.com/uXSCsFe.png)
+![Imgur](https://i.imgur.com/Kbqrs1V.png)
