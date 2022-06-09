@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <title>86Rent-房屋資訊</title>
+</head>
+<body>
+    <header>
+        <div class="header">
+            <div class="fixed-width header-container ">
+                <h1 class="center-vertical">
+                    <a href="/">
+                        <img src="/public/images/h1_logo.png">
+                    </a>
+                </h1>
+                <div class="center-vertical nav-btn">
+                    <button id="register-btn"><a href="/registerch">註冊</a></button>
+                    <button id="signin-btn"><a href="/signin">登入</a></button>
+                    <button id="signout-btn">登出</button>
+                    <button id="memberpage-btn"><img src="/public/images/member icon.png"></button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main id="main">
+        <div class="center-vertical">
+            <div class="fixed-width"> 
+                <div class="house-top-info">
+                    <div class="house-imgs-group" id="house-imgs-group"></div>
+                    <div class="house-topright-info" id="house-topright-info"></div>
+                </div>
+                <div class="infomation-block" id="equipment-block"></div>
+                <div class="infomation-block" id="house-detail"></div>
+                <div class="infomation-block" id="remark-block"></div>
+                <div class="infomation-block" id="reservation-form">
+                    <h2>預約看屋</h2>
+                    <div class="reserve-form">
+                        <h4>預約大名</h4>
+                        <input type="text" name="memberName" id="member-name" placeholder="會員大名" disabled="disabled">
+                        <h4>預約日期</h4>
+                        <input type="datetime-local" id="datetime-local" placeholder="請選擇日期" required>
+                        <h4>聯絡電話</h4>
+                        <input type="text" name="memberPhone" id="member-phone"  placeholder="請填寫電話號碼(ex:0912-345-678)" required>
+                        <h4>其他問題</h4>
+                        <input type="text" name="otherQuestion" id="other-question" placeholder="請填寫問題">
+                        <div id="reserve-err-msg"></div>
+                        <div class="center-vertical">
+                            <input type="submit" id="check-reserve-btn" value="預約">
+                        </div>
+                    </div>
+                </div>
+                <div class="infomation-block" id="register-message">
+                    <h2>預約看屋</h2>
+                    <div class="reserve-form">
+                        <h4>想預約看屋嗎？趕緊加入房客會員來預約吧！</h4>
+                        <div class="center-vertical">
+                            <input type="submit" id="check-register-btn" value="點擊註冊">
+                        </div>
+                    </div>
+                </div>
+                <div class="infomation-block" id="update-reserve-form">
+                    <h2>預約看屋</h2>
+                    <div class="reserve-form">
+                        <h3>您曾經預約過此房，<br>若要重新預約的話請修改過往資料</h4>
+                        <h4>預約日期</h4>
+                        <input type="datetime-local" id="update-datetime-local" placeholder="請選擇日期" required>
+                        <h4>聯絡電話</h4>
+                        <input type="text" name="memberPhone" id="update-member-phone"  placeholder="請填寫電話號碼(ex:0912-345-678)" required>
+                        <h4>其他問題</h4>
+                        <input type="text" name="otherQuestion" id="update-other-question" placeholder="請填寫問題">
+                        <div id="update-reserve-err-msg"></div>
+                        <div class="center-vertical">
+                            <input type="submit" id="update-reserve-btn" value="預約">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <section>
+        <div class="gray-block" id="gray-block"></div>
+        <div class="reserve-ok-msg" id="reserve-ok-msg">
+            <img src="/public/images/check-reserve.png">
+            <h3>你已成功預約此租屋</h3>
+            <div class="reserve-two-btn">
+                <button class="gray-btn" id="reloadinfo-btn">刷新此頁</button>
+                <button class="mi-dark-green-btn" id="go-member-btn">查看預約管理</button>
+            </div>
+        </div>
+        <div class="reserve-ok-msg" id="update-reserve-ok-msg">
+            <img src="/public/images/check-reserve.png">
+            <h3>你已成功更新預約此租屋</h3>
+            <div class="reserve-two-btn">
+                <button class="gray-btn" id="update-reloadinfo-btn">刷新此頁</button>
+                <button class="mi-dark-green-btn" id="update-go-member-btn">查看預約管理</button>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-block center-vertical">
+            <h3>Copyright © 2022 by 86Rent. All Rights reserved.</h3>
+        </div>
+    </footer>
+    <script src="/public/javascript/all-user-page.js"></script>
+    <script src="/public/javascript/house-info.js"></script>
+</body>
+</html>

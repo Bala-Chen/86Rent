@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <title>86Rent-房東會員頁面</title>
+</head>
+<body>
+    <header>
+        <div class="header">
+            <div class="fixed-width header-container ">
+                <h1 class="center-vertical">
+                    <a href="/">
+                        <img src="/public/images/h1_logo.png">
+                    </a>
+                </h1>
+                <div class="homepage-btn">
+                    <button><a href="/"><img src="/public/images/home.png">返回首頁</a></button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="register-type-main">
+            <div class ="register-type-container fixed-width">
+                <div class="top-flex">
+                    <div class="register-route">
+                        <a href="/">首頁</a>
+                        <span>></span>
+                        <a href="/londloadmember">會員管理</a>
+                    </div>
+                    <div class="add-house-btn">
+                        <a href="/londloadmember/addhouse"><button>+ 新增租屋</button></a>
+                    </div>
+                </div>
+                <div class="house-list">
+                    <button id="rent-manage" class="btn-use">出租屋管理</button>
+                    <button id="not-rent-manage" class="btn-default">未出租屋管理</button>
+                    <button id="londload-account" class="btn-default">我的帳戶</button>
+                </div>
+                <div class="house-list-backblock">
+                    <div class="house-list-block" id="renthouse-list-block">
+                        <div class="house-list-title">
+                            <span class="list-house-title">租屋</span>
+                            <span class="listblock-minsize">租金</span>
+                            <span class="listblock-minsize">租賃開始日期</span>
+                            <span class="listblock-minsize">房客姓名</span>
+                            <span class="listblock-minsize">出納</span>
+                            <span class="listblock-minsize">退租</span>
+                        </div>
+                        <div class="houst-list-scroll" id="rentlist-scroll"></div>
+                    </div>
+                    <div class="house-list-block" id="notrenthouse-list-block">
+                        <div class="house-list-title">
+                            <span class="list-house-title">租屋</span>
+                            <span class="listblock-minsize">租金</span>
+                            <span class="listblock-minsize">上架日期</span>
+                            <span class="listblock-minsize">預約詳情</span>
+                            <span class="listblock-minsize">修改資訊</span>
+                            <span class="listblock-minsize">刪除</span>
+                        </div>
+                        <div class="houst-list-scroll" id="not-rentlist-scroll"></div>
+                    </div>
+                    <div class="house-list-block" id="my-account-block">
+                        <div class="housebill-information">
+                            <h4>
+                                <span class="bill-title">帳戶總額：</span>
+                                <span class="bill-housedata red-font" id="account_amount"></span>
+                                <span style="color: #666666; font-size: 20px;">元</span>
+                            </h4>
+                        </div>
+                        <div class="pay-area">
+                            <h3>匯出現金申請</h3>
+                            <form onsubmit="insertRecord(event)">
+                                <h4>欲匯出</h4>
+                                <input type="number" id="take-money" class="tpfield" placeholder="請輸入欲匯出金額">
+                                <span class="gray-font">元</span>
+                                <h4>銀行戶名</h4>
+                                <input type="text" id="bank-username" class="tpfield-del" placeholder="戶名" disabled="disabled">
+                                <span class="red-sm-font">戶名需同權限開通人姓名</span>
+                                <h4>銀行代號</h4>
+                                <input type="text" id="bank-num" class="tpfield" minlength=3 maxlength=3 placeholder="請輸入三碼銀行代號">
+                                <h4>銀行帳號</h4>
+                                <input type="text" id="bank-account" class="tpfield" minlength=6 maxlength=16 placeholder="請輸入銀行帳號">
+                                <h4>實際入帳金額</h4>
+                                <input type="text" id="actual-money" class="tpfield-del" disabled="disabled">
+                                <span class="gray-font">元<span class="red-sm-font">（扣除15元轉帳手續費）</span></span>
+                                <div class="err-msg red-font" id="take-err-msg"></div>
+                                <span class="pay-two-btn">
+                                    <button class="gray-pay-btn" id="gray-back-btn">返回</button>
+                                    <button class="green-pay-btn" id="pay-submit">確定申請</button>
+                                </span>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>          
+        </div>
+    </main>
+    <section>
+        <div class="gray-block" id="gray-block"></div>
+        <div class="warning-msg" id="delete-house-msg">
+            <img src="/public/images/warning.png">
+            <h3>確定刪除此筆租屋嗎？</h3>
+            <div class="reserve-two-btn">
+                <button class="gray-btn" id="backto-btn">返回</button>
+                <button class="mi-dark-green-btn" id="sure-delete-btn">確定刪除</button>
+            </div>
+        </div>
+        <div class="warning-msg" id="quit-rent-msg">
+            <img src="/public/images/warning.png">
+            <h3>確定退租此房客嗎？</h3>
+            <div class="reserve-two-btn">
+                <button class="gray-btn" id="quitrent-back-btn">返回</button>
+                <button class="mi-dark-green-btn" id="sure-quitrent-btn">確定退租</button>
+            </div>
+        </div>
+        <div class="reserve-ok-msg" id="quitrent-success-msg">
+            <img src="/public/images/payok.png">
+            <h3>已完成退租程序，請至未出租屋管理確認</h3>
+            <div class="reserve-two-btn">
+                <button class="mi-dark-green-btn" id="success-ok-btn">確定</button>
+            </div>
+        </div>
+        <div class="reserve-ok-msg" id="quitrent-wait-msg">
+            <img src="/public/images/payok.png">
+            <h3>您的退租程序已完成，等候房客確認退租後即可在未出租管理確認</h3>
+            <div class="reserve-two-btn">
+                <button class="mi-dark-green-btn" id="sure-success-btn">確定</button>
+            </div>
+        </div>
+        <div class="reserve-ok-msg" id="money-sueecss-msg">
+            <img src="/public/images/payok.png">
+            <h3>申請成功，七天內將會匯進您的帳戶裡</h3>
+            <div class="reserve-two-btn">
+                <button class="mi-dark-green-btn" id="sure-money-btn">確定</button>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-block center-vertical">
+            <h3>Copyright © 2022 by 86Rent. All Rights reserved.</h3>
+        </div>
+    </footer>
+    <script src="/public/javascript/londload/member-page-setting.js"></script>
+</body>
+</html>

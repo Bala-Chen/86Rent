@@ -1,0 +1,11 @@
+version: '3'
+services:
+  node-app:
+    image: balachen/86rent
+    ports:
+     - "3500:3500"
+    depends_on:
+     - redis
+  redis:
+    image: redis
+    command: ["redis-server", "--bind", "redis", "--port", "6379"]

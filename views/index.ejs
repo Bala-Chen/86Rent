@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <title>86Rent</title>
+</head>
+<body>
+    <header>
+        <div class="header">
+            <div class="fixed-width header-container ">
+                <h1 class="center-vertical">
+                    <a href="/">
+                        <img src="/public/images/h1_logo.png">
+                    </a>
+                </h1>
+                <div class="center-vertical nav-btn">
+                    <button id="register-btn"><a href="/registerch">註冊</a></button>
+                    <button id="signin-btn"><a href="/signin">登入</a></button>
+                    <button id="signout-btn">登出</button>
+                    <button id="memberpage-btn"><img src="/public/images/member icon.png"></button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="center-vertical computer-main">
+            <div class="index-container fixed-width">
+                <img src="/public/images/bg.png">
+            </div>
+            <div class="search-outside">
+                <div class="search-inside">
+                    <div class="select-block" id="select-block">
+                        <div class="city-block" id="city-block">
+                            <p class="city" id="input-city">地區</p>
+                            <img src="/public/images/iconoir_nav-arrow-down.png" id="city-arrow">
+                        </div>
+                        <div class="select-city" id="select-city">
+                            <dl>
+                                <dt>北部</dt>
+                                <dd>
+                                    <span id="city-1">台北市</span>
+                                    <span id="city-2">新北市</span>
+                                    <span id="city-3">基隆市</span>
+                                    <span id="city-4">桃園市</span>
+                                    <span id="city-5">新竹市</span>
+                                    <span id="city-6">新竹縣</span>                        
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>中部</dt>
+                                <dd>
+                                    <span id="city-7">台中市</span>
+                                    <span id="city-8">彰化縣</span>
+                                    <span id="city-9">雲林縣</span>
+                                    <span id="city-10">苗栗縣</span>
+                                    <span id="city-11">南投縣</span>                      
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>南部</dt>
+                                <dd>
+                                    <span id="city-12">高雄市</span>
+                                    <span id="city-13">台南市</span>
+                                    <span id="city-14">嘉義市</span>
+                                    <span id="city-15">嘉義縣</span>
+                                    <span id="city-16">屏東縣</span>                      
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>東部</dt>
+                                <dd>
+                                    <span id="city-17">宜蘭縣</span>
+                                    <span id="city-18">花蓮縣</span>
+                                    <span id="city-19">台東縣</span>                   
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>離島</dt>
+                                <dd>
+                                    <span id="city-20">澎湖縣</span>
+                                    <span id="city-21">金門縣</span>
+                                    <span id="city-22">連江縣</span> 
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <input type="text" id="index-keyword" placeholder="請輸入關鍵字">
+                    <button class="check-house" id="search-btn">找房子</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-block center-vertical">
+            <h3>Copyright © 2022 by 86Rent. All Rights reserved.</h3>
+        </div>
+    </footer>
+    <script src="/public/javascript/select-city.js"></script>
+    <script src="/public/javascript/all-user-page.js"></script>
+</body>
+</html>

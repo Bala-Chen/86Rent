@@ -1,0 +1,594 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <title>86Rent-修改租屋</title>
+</head>
+<body>
+    <header>
+        <div class="header">
+            <div class="fixed-width header-container ">
+                <h1 class="center-vertical">
+                    <a href="/">
+                        <img src="/public/images/h1_logo.png">
+                    </a>
+                </h1>
+                <div class="homepage-btn">
+                    <button><a href="/"><img src="/public/images/home.png">返回首頁</a></button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="register-type-main">
+            <div class ="register-type-container fixed-width">
+                <div class="register-route">
+                    <a href="/">首頁</a>
+                    <span>></span>
+                    <a href="/londloadmember">會員管理</a>
+                    <span>></span>
+                    <a id="fix-href">修改資訊</a>
+                </div>
+                <form class="addhouse-form" onsubmit="updateValue(event)">
+                    <h2>房屋負責人資訊</h2>
+                    <div class="person-info">
+                        <table>
+                            <tr>
+                                <th><label for="responsible-person">負責人</label></th>
+                                <td>
+                                    <select class="select-identity" name="responsiblePerson" id="responsible-person" required>
+                                        <option value="0" style="display: none;">請選擇項目</option>
+                                        <option value="1">屋主</option>
+                                        <option value="2">代理人</option>
+                                    </select>
+                                    <input type="text" name="firstName" id="responsible-person-firstname" placeholder="請填寫姓氏" maxlength="2" required>
+                                    <span class="choose-gender">
+                                        <input type="radio" name="gender" id="gentlemen" value="先生" checked>
+                                        <label for="gentlemen"><span>先生</span></label>
+                                        <input type="radio" name="gender" id="lady" value="小姐">
+                                        <label for="lady"><span>小姐</span></label>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label for="responsible-phone">行動電話</label></th>
+                                <td>
+                                    <input type="tel" name="cellphone" id="responsible-phone" placeholder="ex：0912-345-678" pattern="09\d{2}(-\d{3}-\d{3})" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label for="responsible-email">E-Mail</label></th>
+                                <td>
+                                    <input type="email" name="newHouseEmail" id="responsible-email" size=50 placeholder="example@gmail.com" pattern="[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+" required>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <h2>房屋基本資訊</h2>
+                    <div class="person-info new-house-info">
+                        <table>
+                            <tr>
+                                <th><label for="house-title">刊登名稱</label></th>
+                                <td>
+                                    <input type="text" name="houseTitleName" id="house-title" size=100  minlength="6" maxlength="20" placeholder="最少6個字元，最多20個字元" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label>租屋特色<p>(最多選5項)</p></label></th>
+                                <td>
+                                    <ul>
+                                        <li>
+                                            <label for="housetag1">
+                                                <input type="checkbox" class="check" id="housetag1" name="housetag" value=1>
+                                                <span class="housetag-span">屋主直住</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="housetag2">
+                                                <input type="checkbox" class="check" id="housetag2" name="housetag" value=2>
+                                                <span class="housetag-span">拎包入住</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="housetag3">
+                                                <input type="checkbox" class="check" id="housetag3" name="housetag" value=3>
+                                                <span class="housetag-span">隨時可入住</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="housetag4">
+                                                <input type="checkbox" class="check" id="housetag4" name="housetag" value=4>
+                                                <span class="housetag-span">有陽台</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="housetag5">
+                                                <input type="checkbox" class="check" id="housetag5" name="housetag" value=5>
+                                                <span class="housetag-span">含車位</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="housetag6">
+                                                <input type="checkbox" class="check" id="housetag6" name="housetag" value=6>
+                                                <span class="housetag-span">近捷運站</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="housetag7">
+                                                <input type="checkbox" class="check" id="housetag7" name="housetag" value=7>
+                                                <span class="housetag-span">近商圈</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="housetag8">
+                                                <input type="checkbox" class="check" id="housetag8" name="housetag" value=8>
+                                                <span class="housetag-span">可開伙</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="housetag9">
+                                                <input type="checkbox" class="check" id="housetag9" name="housetag" value=9>
+                                                <span class="housetag-span">有電梯</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="housetag10">
+                                                <input type="checkbox" class="check" id="housetag10" name="housetag" value=10>
+                                                <span class="housetag-span">可養寵物</span>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            <label for="housetag11">
+                                                <input type="checkbox" class="check" id="housetag11" name="housetag" value=11>
+                                                <span class="housetag-span">免服務費</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="housetag12">
+                                                <input type="checkbox" class="check" id="housetag12" name="housetag" value=12>
+                                                <span class="housetag-span">免管理費</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="housetag13">
+                                                <input type="checkbox" class="check" id="housetag13" name="housetag" value=13>
+                                                <span class="housetag-span">南北通透</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="housetag14">
+                                                <input type="checkbox" class="check" id="housetag14" name="housetag" value=14>
+                                                <span class="housetag-span">全新裝潢</span>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label>租屋地址</label></th>
+                                <td>
+                                    <select class="select-house-city" name="selectHouseCity" id="select-house-city" required>
+                                        <option value="0" style="display: none;">請選擇租屋所在縣市</option>
+                                        <optgroup label="北部">
+                                            <option value=1>台北市</option>
+                                            <option value=2>新北市</option>
+                                            <option value=3>基隆市</option>
+                                            <option value=4>桃園市</option>
+                                            <option value=5>新竹市</option> 
+                                            <option value=6>新竹縣</option>
+                                        </optgroup>
+                                        <optgroup label="中部">
+                                            <option value=7>苗栗縣</option>
+                                            <option value=8>台中市</option>
+                                            <option value=9>彰化縣</option>
+                                            <option value=10>南投縣</option>
+                                            <option value=11>雲林縣</option>
+                                        </optgroup>
+                                        <optgroup label="南部">
+                                            <option value=12>嘉義市</option>
+                                            <option value=13>嘉義縣</option>
+                                            <option value=14>台南市</option>
+                                            <option value=15>高雄市</option>
+                                            <option value=16>屏東縣</option>
+                                        </optgroup>
+                                        <optgroup label="東部">
+                                            <option value=17>宜蘭縣</option>
+                                            <option value=18>花蓮縣</option>
+                                            <option value=19>台東縣</option>
+                                        </optgroup>
+                                        <optgroup label="離島地區">
+                                            <option value=20>澎湖縣</option>
+                                            <option value=21>金門縣</option>
+                                            <option value=22>連江縣</option>
+                                        </optgroup>
+                                    </select>
+                                    <input type="text" name="newHouseAddress" id="new-house-address" size=67 placeholder="請輸入租屋地址(ex:信義區信義路五段...)" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label>房屋類別</label></th>
+                                <td>
+                                    <ul>
+                                        <li>
+                                            <input type="radio" name="buildingType" id="apartment" value=1 checked>
+                                            <label for="apartment"><span>公寓</span></label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" name="buildingType" id="villa" value=2>
+                                            <label for="villa"><span>透天厝</span></label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" name="buildingType" id="mansion" value=3>
+                                            <label for="mansion"><span>華厦</span></label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" name="buildingType" id="elevator-building" value=4>
+                                            <label for="elevator-building"><span>電梯大樓</span></label>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label>租屋型態</label></th>
+                                <td>
+                                    <ul>
+                                        <li>
+                                            <input type="radio" name="roomType" id="all-floor" value="1" checked>
+                                            <label for="all-floor"><span>整層住家</span></label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" name="roomType" id="independent-suite" value="2">
+                                            <label for="independent-suite"><span>獨立套房</span></label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" name="roomType" id="sublet-suite" value="3">
+                                            <label for="sublet-suite"><span>分租套房</span></label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" name="roomType" id="room" value="4">
+                                            <label for="room"><span>雅房</span></label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" name="roomType" id="parking-space" value="5">
+                                            <label for="parking-space"><span>車位</span></label>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label for="ping-number">房屋坪數</label></th>
+                                <td>
+                                    <input type="number" name="pingNumber" id="ping-number" min="0.00" step="0.01" placeholder="坪數">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label for="house-floor">房屋樓層</label></th>
+                                <td>
+                                    <input type="number" name="houseFloor" id="house-floor" min="-10" placeholder="租屋樓層">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label>房屋格局</label></th>
+                                <td>
+                                    <input type="number" name="roomNum" id="room-num" style="width: 100px;" min="0" max="99" placeholder="房數">
+                                    <span>房</span>
+                                    <input type="number" name="livingroomNum" id="livingroom-num" style="width: 100px;" min="0" max="99" placeholder="廳數">
+                                    <span>廳</span>
+                                    <input type="number" name="bathroomNum" id="bathroom-num" style="width: 100px;" min="0" max="99" placeholder="衛浴數">
+                                    <span>衛</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label>房屋租金</label></th>
+                                <td>
+                                    <input type="number" name="rentPrice" id="rent-price" min="0" placeholder="請輸入租金">
+                                    <span>元 / 月</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label>房屋押金</label></th>
+                                <td>
+                                    <input type="radio" name="houseDeposit" id="no-house-deposit" value=1 checked>
+                                    <span>無押金</span>
+                                    <input type="radio" name="houseDeposit" id="yes-house-deposit" value=2>
+                                    <span>有押金</span>
+                                    <select name="rentMonth" id="rent-month" disabled="disabled">
+                                        <option value="0" style="display: none;">請選擇項目</option>
+                                        <option value="face">面議</option>
+                                        <option value="one">一個月租金</option>
+                                        <option value="two">兩個月租金</option>
+                                    </select>
+                                    <input type="number" id="rent-money" name="rentMoney" min="0" placeholder="請輸入押金金額" disabled="disabled">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label>管理費</label></th>
+                                <td>
+                                    <input type="radio" name="managementFee" id="no-management-fee" value="1" checked>
+                                    <span>無</span>
+                                    <input type="radio" name="managementFee" id="yes-management-fee" value="2">
+                                    <span>有</span>
+                                    <input type="number" name="managementPrice" id="management-price" min="0" placeholder="請輸入管理費用" disabled>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <h2>房屋設備與服務</h2>
+                    <div class="person-info house-equipment">
+                        <table>
+                            <tr>
+                                <th><label for="rent-year">最短租期</label></th>
+                                <td>
+                                    <select class="select-identity" name="rentYear" id="select-identity" required>
+                                        <option value="0" style="display: none;">請選擇項目</option>
+                                        <option value=3>三個月</option>
+                                        <option value=6>半年</option>
+                                        <option value=12>一年</option>
+                                        <option value=24>兩年</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label>開伙</label></th>
+                                <td>
+                                    <input type="radio" name="cooking" id="no-cooking" value=1 checked>
+                                    <span>不開伙</span>
+                                    <input type="radio" name="cooking" id="ok-cooking" value=2>
+                                    <span>開伙</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label>養寵物</label></th>
+                                <td>
+                                    <input type="radio" name="pet" id="no-pet" value=1 checked>
+                                    <span>不可</span>
+                                    <input type="radio" name="pet" id="ok-pet" value=2>
+                                    <span>可</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label>租屋限制</label></th>
+                                <td>
+                                    <input type="radio" name="rentLimit" id="rent-limit-0" value=1 checked>
+                                    <span>無</span>
+                                    <input type="radio" name="rentLimit" id="rent-limit-1" value=2>
+                                    <span>限女性</span>
+                                    <input type="radio" name="rentLimit" id="rent-limit-2" value=3>
+                                    <span>限學生</span>
+                                    <input type="radio" name="rentLimit" id="rent-limit-3" value=4>
+                                    <span>限上班族</span>
+                                    <input type="radio" name="rentLimit" id="other-rent-limit" value=5>
+                                    <span>其他</span>
+                                    <input type="text" name="otherLimit" id="rent-limit" placeholder="請輸入條件" disabled="disabled">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label>提供設備<p>(可複選)</p></label></th>
+                                <td>
+                                    <ul>
+                                        <li>
+                                            <label for="furnituretag1">
+                                                <input type="checkbox" id="furnituretag1" name="furnituretag" value=1>
+                                                <span class="furnituretag-span">洗衣機</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="furnituretag2">
+                                                <input type="checkbox" id="furnituretag2" name="furnituretag" value=2>
+                                                <span class="furnituretag-span">冷氣</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="furnituretag3">
+                                                <input type="checkbox" id="furnituretag3" name="furnituretag" value=3>
+                                                <span class="furnituretag-span">熱水器</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="furnituretag4">
+                                                <input type="checkbox" id="furnituretag4" name="furnituretag" value=4>
+                                                <span class="furnituretag-span">第四台</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="furnituretag5">
+                                                <input type="checkbox" id="furnituretag5" name="furnituretag" value=5>
+                                                <span class="furnituretag-span">網路</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="furnituretag6">
+                                                <input type="checkbox" id="furnituretag6" name="furnituretag" value=6>
+                                                <span class="furnituretag-span">天然瓦斯</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="furnituretag7">
+                                                <input type="checkbox" id="furnituretag7" name="furnituretag" value=7>
+                                                <span class="furnituretag-span">車位</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="furnitureetag8">
+                                                <input type="checkbox" id="furnituretag8" name="furnituretag" value=8>
+                                                <span class="furnituretag-span">電梯</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="furnituretag9">
+                                                <input type="checkbox" id="furnituretag9" name="furnituretag" value=9>
+                                                <span class="furnituretag-span">陽台</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="furnituretag10">
+                                                <input type="checkbox" id="furnituretag10" name="furnituretag" value=10>
+                                                <span class="furnituretag-span">冰箱</span>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            <label for="furnituretag11">
+                                                <input type="checkbox" id="furnituretag11" name="furnituretag" value=11>
+                                                <span class="furnituretag-span">沙發</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="furnituretag12">
+                                                <input type="checkbox" id="furnituretag12" name="furnituretag" value=12>
+                                                <span class="furnituretag-span">桌椅</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="furnituretag13">
+                                                <input type="checkbox" id="furnituretag13" name="furnituretag" value=13>
+                                                <span class="furnituretag-span">衣櫃</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="furnituretag14">
+                                                <input type="checkbox" id="furnituretag14" name="furnituretag" value=14>
+                                                <span class="furnituretag-span">床</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="furnituretag15">
+                                                <input type="checkbox" id="furnituretag15" name="furnituretag" value=15>
+                                                <span class="furnituretag-span">電視</span>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <h2>房屋詳情</h2>
+                    <div class="person-info house-info">
+                        <table>
+                            <tr>
+                                <th><label>租金包含<p>(可複選)</p></label></th>
+                                <td>
+                                    <ul>
+                                        <li>
+                                            <label for="renttag1">
+                                                <input type="checkbox" id="renttag1" name="renttag" value=1>
+                                                <span class="renttag-span">管理費</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="renttag2">
+                                                <input type="checkbox" id="renttag2" name="renttag" value=2>
+                                                <span class="renttag-span">清潔費</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="renthousetag3">
+                                                <input type="checkbox" id="renttag3" name="renttag" value=3>
+                                                <span class="renttag-span">第四台</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="renttag4">
+                                                <input type="checkbox" id="renttag4" name="renttag" value=4>
+                                                <span class="renttag-span">網路費</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="renttag5">
+                                                <input type="checkbox" id="renttag5" name="renttag" value=5>
+                                                <span class="renttag-span">水費</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="renttag6">
+                                                <input type="checkbox" id="renttag6" name="renttag" value=6>
+                                                <span class="renttag-span">電費</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="renttag7">
+                                                <input type="checkbox" id="renttag7" name="renttag" value=7>
+                                                <span class="renttag-span">瓦斯費</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="renttag8">
+                                                <input type="checkbox" id="renttag8" name="renttag" value=8>
+                                                <span class="renttag-span">車位</span>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label>產權登記</label></th>
+                                <td>
+                                    <input type="radio" name="houseRights" id="no-rights" value=1 checked>
+                                    <span>未辦理</span>
+                                    <input type="radio" name="houseRights" id="ok-rights" value=2>
+                                    <span>有辦理</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label>房屋朝向</label></th>
+                                <td>
+                                    <input type="text" name="houseDirection" id="house-direction" placeholder="ex:坐南朝北" required> 
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label>法定用途</label></th>
+                                <td>
+                                    <input type="text" name="conditions" id="house-use" placeholder="ex:住宅用,商業用..." required> 
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label>建物面積</label></th>
+                                <td>
+                                    <input type="number" name="houseArea" id="house-area" min="0.00" step="0.01" placeholder="單位：平方公尺" required> 
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <h2>其他</h2>
+                    <div class="person-info other-comment">
+                        <table>
+                            <tr>
+                                <th><label>現況描述</label></th>
+                                <td>
+                                    <textarea name="commentArea" id="remark" rows="5" cols="50" placeholder="請最多填寫250個字元" maxlength="250"></textarea>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="addhouse-submit">
+                        <input type="submit" id="form-submit" value="修改租屋">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <section id="section-detail">
+        <div class="gray-block" id="gray-block"></div>
+        <div class="reserve-ok-msg" id="fixhouse-success-msg">
+            <img src="/public/images/payok.png">
+            <h3>修改成功</h3>
+            <div class="reserve-two-btn">
+                <button class="gray-btn" id="go-member-btn">返回會員頁</button>
+                <button class="mi-dark-green-btn" id="go-houseinfo-btn">前往商品頁面</button>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-block center-vertical">
+            <h3>Copyright © 2022 by 86Rent. All Rights reserved.</h3>
+        </div>
+    </footer>
+    <script src="/public/javascript/londload/fix-house.js"></script>
+</body>
+</html>

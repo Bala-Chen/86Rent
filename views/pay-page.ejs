@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <title>86Rent-繳費系統</title>
+</head>
+<body>
+    <header>
+        <div class="header">
+            <div class="fixed-width header-container ">
+                <h1 class="center-vertical">
+                    <a href="/">
+                        <img src="/public/images/h1_logo.png">
+                    </a>
+                </h1>
+                <div class="homepage-btn">
+                    <button><a href="/"><img src="/public/images/home.png">返回首頁</a></button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main id='main'>
+        <div class="register-type-main">
+            <div class ="register-type-container fixed-width">
+                <div class="top-flex">
+                    <div class="register-route">
+                        <a href="/">首頁</a>
+                        <span>></span>
+                        <a href="/tanantmember">會員管理</a>
+                        <span>></span>
+                        <a id="go-paylist-btn">繳款清單</a>
+                        <span>></span>
+                        <a id="pay-page-btn">繳款</a>
+                    </div>
+                </div>
+                <div class="house-list">
+                    <button class="btn-use">繳款</button>
+                </div>
+                <div class="house-list-backblock">
+                    <div class="house-list-block">
+                        <div class="housebill-information">
+                            <h4>
+                                <span class="bill-title">本月繳款金額：</span>
+                                <span class="bill-housedata red-font" id="paypage-price"></span>
+                                <span><button class="page-priceinfo-btn" id="priceinfo-btn">查看房租細項</button></span>
+                            </h4>
+                        </div>
+                        <div class="pay-area">
+                            <h3>信用卡繳款</h3>
+                            <h4>持卡人姓名</h4>
+                            <input type="text" id="card-user" class="tpfield" placeholder="請輸入姓名">
+                            <h4>信用卡卡號</h4>
+                            <div class="tpfield" id="card-number"></div>
+                            <h4>信用卡有效年月</h4>
+                            <div class="tpfield" id="card-expiration-date"></div>
+                            <h4>信用卡背面末三碼</h4>
+                            <div class="tpfield" id="card-ccv"></div>
+                            <div class="err-msg" id="pay-err-msg"></div>
+                            <span class="pay-two-btn">
+                                <button class="gray-pay-btn" id="gray-back-btn">返回</button>
+                                <button class="green-pay-btn" id="pay-submit">確定繳款</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>          
+        </div>
+    </main>
+    <section id="section-detail">
+        <div class="gray-block" id="gray-block"></div>
+        <div class="reserve-ok-msg" id="pay-success-msg">
+            <img src="/public/images/payok.png">
+            <h3>您已完成繳款</h3>
+            <div class="reserve-two-btn">
+                <button class="mi-dark-green-btn" id="back-member">確定</button>
+            </div>
+        </div>
+        <div class="warning-msg" id="pay-fail-msg">
+            <img src="/public/images/paynotok.png">
+            <h3>繳款失敗</h3>
+            <div class="reserve-two-btn">
+                <button class="mi-dark-green-btn" id="back-paylist">回繳款清單</button>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-block center-vertical">
+            <h3>Copyright © 2022 by 86Rent. All Rights reserved.</h3>
+        </div>
+    </footer>
+    <script src="https://js.tappaysdk.com/tpdirect/v5.9.0"></script>
+    <script src="/public/javascript/tanant/pay-system.js"></script>   
+</body>
+</html>

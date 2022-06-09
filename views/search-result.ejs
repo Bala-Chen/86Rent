@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <title>86Rent-搜尋結果</title>
+</head>
+<body>
+    <header>
+        <div class="header-invisible"></div>
+        <div class="header moving-header">
+            <div class="fixed-width header-container ">
+                <h1 class="center-vertical">
+                    <a href="/">
+                        <img src="/public/images/h1_logo.png">
+                    </a>
+                </h1>
+                <div class="center-vertical nav-btn">
+                    <button id="register-btn"><a href="/registerch">註冊</a></button>
+                    <button id="signin-btn"><a href="/signin">登入</a></button>
+                    <button id="signout-btn">登出</button>
+                    <button id="memberpage-btn"><img src="/public/images/member icon.png"></button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="center-vertical">
+            <div class="fixed-width search-result">
+                <div class="result-block" id="result-block">
+                    <div class="result-title">
+                        <h2>為您找到 <span style="color: #269A85;" id="result-count"></span> 間房屋</h2>
+                        <ul>
+                            <li><button id="default-button" style="color: #269A85;">默認排序</button></li>
+                            <li><button id="recent-button">最近</button></li>
+                            <li><button id="rentsort-button">租金↑</button></li>
+                            <li><button id="roomsum-button">房數↑</button></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="point-block">
+                    <div class="filter-block">
+                        <h2>
+                            <div class="filter-title-left">
+                                <img src="/public/images/Vector.png">
+                                <span>篩選條件</span>
+                            </div>
+                            <div class="filter-title-right">
+                                <button id="gohome-btn"><img src="/public/images/filter-home.png"></button>
+                                <button id="gotop-btn"><img src="/public/images/page-up.png"></button>
+                            </div>
+                        </h2>
+                        <h3>租屋型態</h3>
+                        <select class="search-select" name="selectRoomType" id="selectRoomType">
+                            <option value="0" style="display: none;">請選擇租屋型態</option>
+                            <option value="1">整層住家</option>
+                            <option value="2">獨立套房</option>
+                            <option value="3">分租套房</option>
+                            <option value="4">雅房</option>
+                            <option value="5">車位</option>
+                        </select>
+                        <h3>建物型態</h3>
+                        <select class="search-select" name="selectBuildingType" id="selectBuildingType">
+                            <option value="0" style="display: none;">請選擇建物型態</option>
+                            <option value=1>公寓</option>
+                            <option value=2>透天厝</option>
+                            <option value=3>華厦</option>
+                            <option value=4>大樓</option>
+                        </select>
+                        <h3>房數</h3>
+                        <select class="search-select" name="selectRoomSum" id="selectRoomSum">
+                            <option value="0" style="display: none;">請選擇房數</option>
+                            <option value="1">1房</option>
+                            <option value="2">2房</option>
+                            <option value="3">3房</option>
+                            <option value="4">4房</option>
+                            <option value="5">5房或以上</option>
+                        </select>
+                        <button class="filter-search-btn" id="filter-search-btn">搜尋</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-block center-vertical">
+            <h3>Copyright © 2022 by 86Rent. All Rights reserved.</h3>
+        </div>
+    </footer>
+    <script src="/public/javascript/all-user-page.js"></script>
+    <script src="/public/javascript/search-page-setting.js"></script>
+</body>
+</html>

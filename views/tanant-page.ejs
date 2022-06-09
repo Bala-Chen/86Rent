@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <title>86Rent-房客會員頁面</title>
+</head>
+<body>
+    <header>
+        <div class="header">
+            <div class="fixed-width header-container ">
+                <h1 class="center-vertical">
+                    <a href="/">
+                        <img src="/public/images/h1_logo.png">
+                    </a>
+                </h1>
+                <div class="homepage-btn">
+                    <button><a href="/"><img src="/public/images/home.png">返回首頁</a></button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="register-type-main">
+            <div class ="register-type-container fixed-width">
+                <div class="top-flex">
+                    <div class="register-route">
+                        <a href="/">首頁</a>
+                        <span>></span>
+                        <a href="/tanantmember">會員管理</a>
+                    </div>
+                </div>
+                <div class="house-list">
+                    <button id="my-rent-house" class="btn-use">我的租屋</button>
+                    <button id="reserve-house" class="btn-default">預約看屋管理</button>
+                </div>
+                <div class="house-list-backblock">
+                    <div class="house-list-block" id="myrenthouse-list-block">
+                        <div class="house-list-title">
+                            <span class="list-house-title">租屋</span>
+                            <span class="listblock-minsize">租金</span>
+                            <span class="listblock-minsize">租賃開始日期</span>
+                            <span class="listblock-minsize">房東姓名</span>
+                            <span class="listblock-minsize">繳交租金</span>
+                            <span class="listblock-minsize">退租</span>
+                        </div>
+                        <div class="houst-list-scroll" id="myrenthouse-list-scroll"></div>
+                    </div>
+                    <div class="house-list-block" id="reservehouse-list-block">
+                        <div class="house-list-title">
+                            <span class="list-house-title">租屋</span>
+                            <span class="listblock-minsize">租金</span>
+                            <span class="listblock-minsize">預約日期</span>
+                            <span class="listblock-minsize">聯絡人</span>
+                            <span class="listblock-minsize">聯絡人電話</span>
+                            <span class="listblock-minsize">取消預約</span>
+                        </div>
+                        <div class="houst-list-scroll" id="tanant-reserve-listscroll"></div>
+                    </div>
+                </div>
+            </div>          
+        </div>
+    </main>
+    <section>
+        <div class="gray-block" id="gray-block"></div>
+        <div class="warning-msg" id="cancel-reserve-msg">
+            <img src="/public/images/warning.png">
+            <h3>確定取消此預約嗎？</h3>
+            <div class="reserve-two-btn">
+                <button class="gray-btn" id="back-btn">返回</button>
+                <button class="mi-dark-green-btn" id="sure-cancel-btn">確定取消</button>
+            </div>
+        </div>
+        <div class="reserve-ok-msg" id="cancel-ok-msg">
+            <img src="/public/images/material-symbols_free-cancellation.png">
+            <h3>您已成功取消此筆預約</h3>
+            <div class="reserve-two-btn">
+                <button class="mi-dark-green-btn" id="back-member-btn">返回會員頁面</button>
+            </div>
+        </div>
+        <div class="warning-msg" id="quit-rent-msg">
+            <img src="/public/images/warning.png">
+            <h3>確定退租此房屋嗎？</h3>
+            <div class="reserve-two-btn">
+                <button class="gray-btn" id="quitrent-back-btn">返回</button>
+                <button class="mi-dark-green-btn" id="sure-quitrent-btn">確定退租</button>
+            </div>
+        </div>
+        <div class="reserve-ok-msg" id="quitrent-success-msg">
+            <img src="/public/images/payok.png">
+            <h3>已完成退租程序，請至我的租屋確認</h3>
+            <div class="reserve-two-btn">
+                <button class="mi-dark-green-btn" id="success-ok-btn">確定</button>
+            </div>
+        </div>
+        <div class="reserve-ok-msg" id="quitrent-wait-msg">
+            <img src="/public/images/payok.png">
+            <h3>您的退租程序已完成，等候房東確認退租後即會自動刪除系統內有關此租屋相關歷史</h3>
+            <div class="reserve-two-btn">
+                <button class="mi-dark-green-btn" id="sure-success-btn">確定</button>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-block center-vertical">
+            <h3>Copyright © 2022 by 86Rent. All Rights reserved.</h3>
+        </div>
+    </footer>
+    <script src="/public/javascript/tanant/tanant-page-setting.js"></script>
+</body>
+</html>
