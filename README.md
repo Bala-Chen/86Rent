@@ -31,14 +31,13 @@ CreditCard CVV：123 <br>
 ## 功能介紹
 
 ### 首頁搜尋
-可以選擇縣市及搜尋關鍵字(根據案名及地址)來尋找合適租屋，都不輸入按找房子則會跳出所有結果<br>
-![Imgur](https://i.imgur.com/HwrYiH6.png){:width="75%"}
-<br>
+可以選擇縣市及搜尋關鍵字(根據案名及地址)來尋找合適租屋，都不輸入按找房子則會跳出所有結果
+![Imgur](https://i.imgur.com/HwrYiH6.png)
 搜尋頁面可以篩選條件、條件排序，點選查看詳情可以看該房屋的詳情
-<br>
-![Imgur](https://i.imgur.com/gi2zXaS.png){:width="75%"}
-<br>
+![Imgur](https://i.imgur.com/gi2zXaS.png)
 房屋詳情頁面可以查看有關該房屋的詳細資料，房客轉到最下方可以預約該房子的看屋時間
-<br>
-![Imgur](https://i.imgur.com/uXSCsFe.png){:width="75%"}
-![Imgur](https://i.imgur.com/Kbqrs1V.png){:width="75%"}
+![Imgur](https://i.imgur.com/uXSCsFe.png)
+![Imgur](https://i.imgur.com/Kbqrs1V.png)
+註冊頁面可選擇房東身份或房客身份，一個email只能申請其中一種身份，註冊表單則有reCAPTCHA驗證是否為機器人
+![Imgur](https://i.imgur.com/ToA2WPt.png)
+![Imgur](https://i.imgur.com/F4Ln4kU.png)
