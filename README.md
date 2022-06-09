@@ -6,16 +6,16 @@
 3. 若註冊身份為房客，可以預約看尚未出租的房子，並在出租後可進行房租線上付款
 
 ## Demo
-Demo Link：https://86-rent.com
+Demo Link：https://86-rent.com <br>
 
-Londload Test Account：guava1234@abc.com
-Londload Test Password：guavatest
+Londload Test Account：guava1234@abc.com <br>
+Londload Test Password：guavatest <br>
 
-Tanant Test Account：orange1234@abc.com
-Tanant Test Password：orangetest
-CreditCard Number：4242-4242-4242-4242
-CreditCard Valid Date：01/23
-CreditCard CVV：123
+Tanant Test Account：orange1234@abc.com <br>
+Tanant Test Password：orangetest <br>
+CreditCard Number：4242-4242-4242-4242 <br>
+CreditCard Valid Date：01/23 <br>
+CreditCard CVV：123 <br>
 
 ## 使用技術
 - Node.js Express
