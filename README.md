@@ -46,10 +46,19 @@ CreditCard CVV：123 <br>
 ![Imgur](https://i.imgur.com/F4Ln4kU.png)
 ### 房東會員系統
 房東系統分為三大功能，分別為出租後的房屋管理，未出租的房屋管理及上架，以及帳戶提款功能<br>
-點擊右上角按紐可以填寫上架房屋的表單
-![Imgur](https://i.imgur.com/OJzqvzk.png)
-![Imgur](https://i.imgur.com/rClLw1z.png)
-![Imgur](https://i.imgur.com/SmGJxfg.png)
+- 點擊右上角按紐可以填寫上架房屋的表單
+- 出租屋管理
+    - 點擊繳款詳情可以看到該房屋的房租繳款歷史紀錄
+    - 點擊退租可以退租此房屋，待雙方皆確認退租後會此房屋會回到未出租屋管理區
+- 未出租屋管理
+    - 點擊查看預約可以看有哪些房客預約看此屋及相關連絡資料
+    - 點擊修改資訊可以修改房屋資訊
+    - 點擊刪除可以下架該房屋並刪除該房屋所有預約記錄及房屋資訊
+- 我的帳戶
+    - 可以查看因繳交房屋而入帳的金額，並可申請提款
+![Imgur](https://i.imgur.com/EDWh3A9.png)
+![Imgur](https://i.imgur.com/8h1HXiS.png)
+![Imgur](https://i.imgur.com/mJkpsgm.png)
 ![Imgur](https://i.imgur.com/eoNtcq7.png)
 ### 房客會員系統
 房客系統分為兩大功能，一為出租後的租屋管理，二為確認預約房屋的資料
