@@ -56,7 +56,7 @@ CreditCard CVV：123 <br>
     - 點擊刪除可以下架該房屋並刪除該房屋所有預約記錄及房屋資訊
 - 我的帳戶
     - 可以查看因繳交房屋而入帳的金額，並可申請提款
-![Imgur](https://i.imgur.com/EDWh3A9.png)
+![Imgur](https://i.imgur.com/IWLs2dk.png)
 ![Imgur](https://i.imgur.com/8h1HXiS.png)
 ![Imgur](https://i.imgur.com/mJkpsgm.png)
 ![Imgur](https://i.imgur.com/eoNtcq7.png)
