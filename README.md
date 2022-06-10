@@ -44,6 +44,13 @@ CreditCard CVV：123 <br>
 註冊頁面可選擇房東身份或房客身份，一個email只能申請其中一種身份，註冊表單則有reCAPTCHA驗證是否為機器人
 ![Imgur](https://i.imgur.com/ToA2WPt.png)
 ![Imgur](https://i.imgur.com/F4Ln4kU.png)
+### 房東會員系統
+房東系統分為三大功能，分別為出租後的房屋管理，未出租的房屋管理及上架，以及帳戶提款功能<br>
+點擊右上角按紐可以填寫上架房屋的表單
+![Imgur](https://i.imgur.com/OJzqvzk.png)
+![Imgur](https://i.imgur.com/rClLw1z.png)
+![Imgur](https://i.imgur.com/SmGJxfg.png)
+![Imgur](https://i.imgur.com/eoNtcq7.png)
 ### 房客會員系統
 房客系統分為兩大功能，一為出租後的租屋管理，二為確認預約房屋的資料
 ![Imgur](https://i.imgur.com/hqc1VOC.png)
