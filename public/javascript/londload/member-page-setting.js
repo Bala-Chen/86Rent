@@ -110,6 +110,12 @@ function createNoRentItem(data){
         listDate.textContent = data[i].buildDate;
         const listReserve = document.createElement('span');
         listReserve.className = "listblock-minsize";
+        if (data[i].countNum != 0){
+            const listNumber = document.createElement('div');
+            listNumber.className = "red-circle";
+            listNumber.textContent = data[i].countNum;
+            listReserve.appendChild(listNumber);
+        }
         const listReserveBtn = document.createElement('button');
         listReserveBtn.className = "cashier-info-btn";
         listReserveBtn.textContent = "查看預約";

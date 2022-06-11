@@ -32,9 +32,9 @@ const addRentBill = async(req,res) =>{
 }
 
 function _createId(){
-    const rawPre = (Date.now()-new Date(1652098249212).getTime()) / 1000 ;  //.gettime取得日期經過毫秒數
-    const preNumber = Number(rawPre.toFixed()) * 1000; //tofixed四捨五入取整數
-    const randam = Math.floor(Math.random() * 1000);  //0.321223 => 321
+    const rawPre = (Date.now()-new Date(1652098249212).getTime()) / 1000 ;  
+    const preNumber = Number(rawPre.toFixed()) * 1000; 
+    const randam = Math.floor(Math.random() * 1000); 
     const tenNum = String(preNumber+randam).slice(-10)
     return tenNum
 }

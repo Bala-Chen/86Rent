@@ -1731,6 +1731,35 @@ button{
     margin-left: 16px;
 }
 
+.red-circle{
+    width: 18px;
+    height: 18px;
+    background-color: #CD4848;
+    font-weight: 700;
+    font-size: 12px;
+    color: #FFFFFF;
+    border-radius: 50%;
+    position: relative;
+    margin-top: -14px;
+    top: 9px;
+    left: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.red-dot{
+    width: 15px;
+    height: 15px;
+    background-color: #CD4848;
+    color: #FFFFFF;
+    border-radius: 50%;
+    position: relative;
+    margin-top: -14px;
+    top: 9px;
+    left: 7px;
+}
+
 @media screen and (min-width: 768px) and (max-width:1200px){
     .fixed-width{
         width: 90%;

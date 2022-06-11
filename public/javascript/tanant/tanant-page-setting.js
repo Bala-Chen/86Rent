@@ -92,6 +92,11 @@ function createRentItem(data){
         listLondload.textContent = data[i].londloadName;
         const listPayInfo = document.createElement('span');
         listPayInfo.className = "listblock-minsize";
+        if (data[i].status == "X"){
+            const redDot = document.createElement('div');
+            redDot.className = "red-dot"
+            listPayInfo.appendChild(redDot)
+        }
         const listPayInfoBtn = document.createElement('button');
         listPayInfoBtn.className = "cashier-info-btn";
         listPayInfoBtn.id = data[i].houseId+'-paylist';

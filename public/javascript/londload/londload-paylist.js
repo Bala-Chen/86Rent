@@ -36,7 +36,6 @@ function getHouseBill(){
         return res.json()
     })
     .then((resJson)=>{
-        console.log(resJson)
         if (resJson.payList == null){
             const main = document.getElementById("main")
             main.innerHTML=""

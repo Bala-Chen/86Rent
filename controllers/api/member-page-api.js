@@ -37,10 +37,11 @@ const getRentList = async(req,res)=>{
 const getNotRentList = async(req,res) =>{
     const email = req.session.user;
     const londloadId = await _getLondloadId(email)
-    const sql = "SELECT housing_info.house_id,img_url,house_name,rent_price,insert_timestamp \
+    const sql = "SELECT housing_info.house_id,img_url,house_name,rent_price,insert_timestamp,count_num \
     FROM housing_info \
     JOIN housing_contact ON housing_contact.house_id = housing_info.house_id \
     JOIN house_img ON housing_info.house_id = house_img.house_id \
+    LEFT JOIN (SELECT house_id,COUNT(list_id) AS count_num FROM reserve_list GROUP BY house_id) as rentcount ON housing_info.house_id = rentcount.house_id \
     WHERE rental_status = ? AND member_id = ? \
     GROUP BY housing_info.house_id \
     ORDER BY insert_timestamp DESC;"
@@ -49,17 +50,24 @@ const getNotRentList = async(req,res) =>{
     const result = await Pool.query(connection,sql,val);
     let dataList = [];
     for (i=0;i<result.length;i++){
-        const buildDate = new Date(result[i].insert_timestamp);  //-3600000?
+        const buildDate = new Date(result[i].insert_timestamp);
         const buildDateYear = buildDate.getFullYear();
         const buildDateMonth = buildDate.getMonth() + 1 < 10 ? "0" + (buildDate.getMonth() + 1) : buildDate.getMonth() + 1 ;
         const buildDateDate = buildDate.getDate() < 10 ? "0" + buildDate.getDate() : buildDate.getDate();
         const fullDate = buildDateYear+"-"+buildDateMonth+"-"+buildDateDate
+        let countNum;
+        if (result[i].count_num == null){
+            countNum = 0
+        } else {
+            countNum = result[i].count_num
+        }   
         let data = {
             houseId:result[i].house_id,
             imgUrl:result[i].img_url,
             houseName:result[i].house_name,
             rentPrice:result[i].rent_price,
-            buildDate:fullDate
+            buildDate:fullDate,
+            countNum:countNum
         }
         dataList.push(data)
     }
@@ -120,17 +128,19 @@ const getLondLoadReserveList = async(req,res)=>{
 const getTanantRentList = async(req,res)=>{
     const email = req.session.user;
     const tanantId = await _getTanantId(email)
-    const sql = "SELECT ar.house_id,house_name,rent_price,add_timestamp,londload_name,img_url \
+    const sql = "SELECT ar.house_id,house_name,rent_price,add_timestamp,londload_name,img_url,`status` \
     FROM already_rented AS ar \
     LEFT JOIN londload_member AS lm ON ar.londload_id = lm.londload_id \
     LEFT JOIN housing_info AS hi ON ar.house_id = hi.house_id \
     LEFT JOIN house_img AS img ON ar.house_id = img.house_id \
+    LEFT JOIN (SELECT house_id,`status` FROM rentbill_list WHERE `status`='X') AS rs ON ar.house_id= rs.house_id \
     WHERE ar.tanant_id = ? AND ar.tanant_quitrent = '未退租' \
     GROUP BY ar.house_id \
     ORDER BY add_timestamp DESC;"
     const val = [tanantId,]
     const connection = await Pool.getConnection();
     const result = await Pool.query(connection,sql,val);
+    let billStatus;
     let dataList = [];
     for (i=0;i<result.length;i++){
         const buildDate = new Date(Number(result[i].add_timestamp));
@@ -138,13 +148,19 @@ const getTanantRentList = async(req,res)=>{
         const buildDateMonth = buildDate.getMonth() + 1 < 10 ? "0" + (buildDate.getMonth() + 1) : buildDate.getMonth() + 1 ;
         const buildDateDate = buildDate.getDate() < 10 ? "0" + buildDate.getDate() : buildDate.getDate();
         const fullDate = buildDateYear+"-"+buildDateMonth+"-"+buildDateDate
+        if (result[i].status == null){
+            billStatus = "O"
+        } else {
+            billStatus = "X"
+        }
         let data = {
             houseId:result[i].house_id,
             imgUrl:result[i].img_url,
             houseName:result[i].house_name,
             rentPrice:result[i].rent_price,
             buildDate:fullDate,
-            londloadName:result[i].londload_name
+            londloadName:result[i].londload_name,
+            status:billStatus
         }
         dataList.push(data)
     }
