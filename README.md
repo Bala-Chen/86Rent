@@ -8,11 +8,11 @@
 ## Demo
 Demo Link：https://86-rent.com <br>
 
-Londload Test Account：guava1234@abc.com <br>
-Londload Test Password：guavatest <br>
+Landlord Test Account：guava1234@abc.com <br>
+Landlord Test Password：guavatest <br>
 
-Tanant Test Account：orange1234@abc.com <br>
-Tanant Test Password：orangetest <br>
+Tenant Test Account：orange1234@abc.com <br>
+Tenant Test Password：orangetest <br>
 CreditCard Number：4242-4242-4242-4242 <br>
 CreditCard Valid Date：01/23 <br>
 CreditCard CVV：123 <br>
@@ -32,7 +32,7 @@ CreditCard CVV：123 <br>
 ![Imgur](https://i.imgur.com/3KpbMQP.jpg)
 
 ## 資料庫架構圖
-![Imgur](https://i.imgur.com/0ExOf0k.png)
+![Imgur](https://i.imgur.com/G075d7M.png)
 
 ## 功能介紹
 

@@ -1,7 +1,7 @@
-//londload member page
+//landlord member page
 const rentManageBtn = document.getElementById('rent-manage');
 const noRentManageBtn = document.getElementById('not-rent-manage');
-const myAccountBtn = document.getElementById('londload-account');
+const myAccountBtn = document.getElementById('landlord-account');
 
 function changeNoRentBlock(){
     const rentBlock = document.getElementById('renthouse-list-block');
@@ -66,7 +66,7 @@ function getUserStatus(){
 };
 
 function getNoRentList(){
-    fetch('/londloadApi/notRentedList',{
+    fetch('/landlordApi/notRentedList',{
         method:'GET'
     })
     .then((res)=>{
@@ -78,7 +78,7 @@ function getNoRentList(){
 }
 
 function getRentList(){
-    fetch('/londloadApi/rentedList',{
+    fetch('/landlordApi/rentedList',{
         method:'GET'
     })
     .then((res)=>{
@@ -168,9 +168,9 @@ function createRentItem(data){
         const listDate = document.createElement('span');
         listDate.className = "listblock-minsize";
         listDate.textContent = data[i].buildDate;
-        const listTanant = document.createElement('span');
-        listTanant.className = "listblock-minsize";
-        listTanant.textContent = data[i].tanantName;
+        const listTenant = document.createElement('span');
+        listTenant.className = "listblock-minsize";
+        listTenant.textContent = data[i].tenantName;
         const listPayInfo = document.createElement('span');
         listPayInfo.className = "listblock-minsize";
         const listPayInfoBtn = document.createElement('button');
@@ -191,7 +191,7 @@ function createRentItem(data){
         listItem.appendChild(listTitleSpan);
         listItem.appendChild(listRentPriceSpan);
         listItem.appendChild(listDate);
-        listItem.appendChild(listTanant);
+        listItem.appendChild(listTenant);
         listItem.appendChild(listPayInfo);
         listItem.appendChild(listQuitSpan);
         listScroll.appendChild(listItem)
@@ -200,7 +200,7 @@ function createRentItem(data){
 
 function goReservePage(){
     let houseID = this.id.split("-reserve-btn")[0];
-    window.location.href="/londloadmember/reserve?house="+ houseID;
+    window.location.href="/landlordmember/reserve?house="+ houseID;
 }
 
 function deleteHouseData(){
@@ -226,7 +226,7 @@ function deleteHouseData(){
 }
 
 function sureDeleteHouse(houseID){
-    fetch('/londloadApi/house',{
+    fetch('/landlordApi/house',{
         method:'DELETE',
         headers: {"Content-Type":"application/json"},
         body:JSON.stringify({houseId:houseID})
@@ -243,7 +243,7 @@ function sureDeleteHouse(houseID){
 
 function goPaylist(){
     const houseID = this.id.split('-paylist')[0]
-    location.replace("/londloadmember/pay/"+houseID)
+    location.replace("/landlordmember/pay/"+houseID)
 }
 
 function quitRent(){
@@ -304,17 +304,17 @@ function sureQuitRent(houseId){
 
 function goFixFrom(){
     const houseID = this.id.split('-fixhouse-btn')[0]
-    location.replace("/londloadmember/fixhouse/"+houseID)
+    location.replace("/landlordmember/fixhouse/"+houseID)
 }
 
 function getAccountAmount(){
-    fetch('/londloadApi/accountAmount')
+    fetch('/landlordApi/accountAmount')
     .then((res)=>{
         return res.json()
     })
     .then((resJson)=>{
         document.getElementById('account_amount').textContent = '$ ' + resJson.data.amount;
-        document.getElementById('bank-username').value = resJson.data.londloadName;
+        document.getElementById('bank-username').value = resJson.data.landlordName;
     })
 }
 
@@ -343,7 +343,7 @@ function insertRecord(e){
         setTimeout(()=>{
             document.getElementById('pay-submit').removeAttribute("disabled")
         },2000)
-        fetch('/londloadApi/accountAmount',{
+        fetch('/landlordApi/accountAmount',{
             method:'PUT',
             headers: {"Content-Type":"application/json"},
             body:JSON.stringify({balance:balance,getMoney:getMoney,bankUsername:bankUsername,bankNum:bankNum,bankAccount:bankAccount,actualMoney:actualMoney,dateNow:dateNow})

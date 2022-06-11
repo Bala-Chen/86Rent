@@ -18,40 +18,40 @@ const chooseRegisterView = (req,res)=>{
     res.render('choose-register');
 }
 
-const registerLondloadView = (req,res)=>{
-    res.render('register-londload');
+const registerLandlordView = (req,res)=>{
+    res.render('register-landlord');
 }
 
-const registerTanantView = (req,res)=>{
-    res.render('register-tanant');
+const registerTenantView = (req,res)=>{
+    res.render('register-tenant');
 }
 
 const addHouseView = (req,res)=>{
     res.render('add-house');
 }
 
-const londloadPageView = (req,res)=>{
-    res.render('londload-page');
+const landlordPageView = (req,res)=>{
+    res.render('landlord-page');
 }
 
-const tanantPageView = (req,res)=>{
-    res.render('tanant-page');
+const tenantPageView = (req,res)=>{
+    res.render('tenant-page');
 }
 
-const londloadReserveView = (req,res)=>{
+const landlordReserveView = (req,res)=>{
     res.render('reserve-page')
 }
 
-const londloadPayList = (req,res)=>{
-    res.render('londload-paylist')
+const landlordPayList = (req,res)=>{
+    res.render('landlord-paylist')
 }
 
-const londloadAddBill = (req,res)=>{
+const landlordAddBill = (req,res)=>{
     res.render('add-bill')
 }
 
-const tanantPaylist = (req,res)=>{
-    res.render('tanant-paylist')
+const tenantPaylist = (req,res)=>{
+    res.render('tenant-paylist')
 }
 
 const payPageView = (req,res)=>{
@@ -72,15 +72,15 @@ module.exports = {
     houseInfoView:houseInfoView,
     signinView:signinView,
     chooseRegisterView:chooseRegisterView,
-    registerLondloadView:registerLondloadView,
-    registerTanantView:registerTanantView,
+    registerLandlordView:registerLandlordView,
+    registerTenantView:registerTenantView,
     addHouseView:addHouseView,
-    londloadPageView:londloadPageView,
-    tanantPageView:tanantPageView,
-    londloadReserveView:londloadReserveView,
-    londloadPayList:londloadPayList,
-    londloadAddBill:londloadAddBill,
-    tanantPaylist:tanantPaylist,
+    landlordPageView:landlordPageView,
+    tenantPageView:tenantPageView,
+    landlordReserveView:landlordReserveView,
+    landlordPayList:landlordPayList,
+    landlordAddBill:landlordAddBill,
+    tenantPaylist:tenantPaylist,
     payPageView:payPageView,
     fixBillPageView:fixBillPageView,
     fixHouseView:fixHouseView

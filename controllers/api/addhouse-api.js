@@ -14,7 +14,7 @@ const upload = multer({
 });
 
 const addhouseApi = async(req,res)=>{
-    const resultId = await _selectLondloadId(req.session.user)
+    const resultId = await _selectLandlordId(req.session.user)
     const houseId = "H"+_createId();
     const connection = await Pool.getConnection();
     try{
@@ -31,16 +31,16 @@ const addhouseApi = async(req,res)=>{
     } catch(err){
         await Pool.rollback(connection,err);
     } finally {
-        res.redirect('/londloadmember')
+        res.redirect('/landlordmember')
     }
 }
 
-const _selectLondloadId= async(email) => {
+const _selectLandlordId= async(email) => {
     const connection = await Pool.getConnection();
-    const selectIdSql = "SELECT londload_id FROM londload_member WHERE londload_email = ?";
+    const selectIdSql = "SELECT landlord_id FROM landlord_member WHERE landlord_email = ?";
     const selectIdVal = [email,];
     const result = await Pool.query(connection,selectIdSql,selectIdVal)
-    return result[0].londload_id
+    return result[0].landlord_id
 }
 
 const _createId = () => {
@@ -51,9 +51,9 @@ const _createId = () => {
     return eightNum
 }
 
-const _insertHousePerson = async(connection,data,houseId,londloadId) =>{ 
+const _insertHousePerson = async(connection,data,houseId,landlordId) =>{ 
     const sqlIn = "INSERT INTO housing_contact VALUES (?,?,?,?,?,?);"
-    const valueIn = [houseId,londloadId,data.responsiblePerson,data.firstName+data.gender,data.cellphone,data.newHouseEmail]
+    const valueIn = [houseId,landlordId,data.responsiblePerson,data.firstName+data.gender,data.cellphone,data.newHouseEmail]
     await Pool.query(connection,sqlIn,valueIn);
 }
 

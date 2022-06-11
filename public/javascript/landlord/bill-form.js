@@ -22,8 +22,8 @@ function getUserStatus(){
 function getPriceValue(){
     if (window.location.href.includes('addbill')){
         const houseId = window.location.href.split('/')[window.location.href.split('/').length-2] 
-        document.getElementById('go-paylist-btn').href = "/londloadmember/pay/"+houseId;
-        fetch('/londloadApi/bill?houseId='+houseId)
+        document.getElementById('go-paylist-btn').href = "/landlordmember/pay/"+houseId;
+        fetch('/landlordApi/bill?houseId='+houseId)
         .then((res)=>{
             return res.json();
         })
@@ -34,9 +34,9 @@ function getPriceValue(){
     } else if (window.location.href.includes('fixbill')){
         const billId = window.location.href.split('/')[window.location.href.split('/').length-1]
         const houseId = window.location.href.split('/')[window.location.href.split('/').length-3]
-        document.getElementById('go-paylist-btn').href = "/londloadmember/pay/"+houseId;
-        document.getElementById('go-fixbill-btn').href = "/londloadmember/pay/"+houseId+"/fixbill/"+billId;
-        fetch('/londloadApi/bill?houseId='+houseId+'&billId='+billId)
+        document.getElementById('go-paylist-btn').href = "/landlordmember/pay/"+houseId;
+        document.getElementById('go-fixbill-btn').href = "/landlordmember/pay/"+houseId+"/fixbill/"+billId;
+        fetch('/landlordApi/bill?houseId='+houseId+'&billId='+billId)
         .then((res)=>{
             return res.json();
         })
@@ -97,7 +97,7 @@ function getPrice(e){
     const totalMoney = parseInt(document.getElementById('total-money').textContent);
     if (window.location.href.includes('addbill')){
         const houseId = window.location.href.split('/')[window.location.href.split('/').length-2]
-        fetch('/londloadApi/bill',{
+        fetch('/landlordApi/bill',{
             method:'POST',
             headers: {"Content-Type":"application/json"},
             body:JSON.stringify({houseID:houseId,rentPrice:rentPrice,waterPrice:waterPrice,electricPrice:electricPrice,managePrice:managePrice,cleanPrice:cleanPrice,fourPrice:fourPrice,netPrice:netPrice,gasPrice:gasPrice,parkingPrice:parkingPrice,totalMoney:totalMoney})
@@ -107,13 +107,13 @@ function getPrice(e){
         })
         .then((resJson)=>{
             if (resJson.ok){
-                location.replace('/londloadmember/pay/'+houseId)
+                location.replace('/landlordmember/pay/'+houseId)
             }
         })
     } else if (window.location.href.includes('fixbill')){
         const billId = window.location.href.split('/')[window.location.href.split('/').length-1]
         const houseId = window.location.href.split('/')[window.location.href.split('/').length-3]
-        fetch('/londloadApi/bill',{
+        fetch('/landlordApi/bill',{
             method:'PUT',
             headers: {"Content-Type":"application/json"},
             body:JSON.stringify({houseID:houseId,billID:billId,rentPrice:rentPrice,waterPrice:waterPrice,electricPrice:electricPrice,managePrice:managePrice,cleanPrice:cleanPrice,fourPrice:fourPrice,netPrice:netPrice,gasPrice:gasPrice,parkingPrice:parkingPrice,totalMoney:totalMoney})
@@ -123,7 +123,7 @@ function getPrice(e){
         })
         .then((resJson)=>{
             if (resJson.ok){
-                location.replace('/londloadmember/pay/'+houseId)
+                location.replace('/landlordmember/pay/'+houseId)
             }
         })
     }

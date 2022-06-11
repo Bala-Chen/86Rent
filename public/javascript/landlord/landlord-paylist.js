@@ -23,15 +23,15 @@ function goAddRentBill(){
     const houseId = window.location.href.split('/')[window.location.href.split('/').length-1]
     const addRentbillBtn = document.getElementById('add-rentbill-btn');
     addRentbillBtn.addEventListener('click',()=>{
-        location.replace('/londloadmember/pay/'+ houseId +'/addbill')
+        location.replace('/landlordmember/pay/'+ houseId +'/addbill')
     })
 }
 
 function getHouseBill(){
     const houseId = window.location.href.split('/')[window.location.href.split('/').length-1]
     const payListBtn = document.getElementById('go-paylist-btn');
-    payListBtn.href = "/londloadmember/pay/"+ houseId;
-    fetch('/londloadApi/pay/'+houseId)
+    payListBtn.href = "/landlordmember/pay/"+ houseId;
+    fetch('/landlordApi/pay/'+houseId)
     .then((res)=>{
         return res.json()
     })
@@ -41,10 +41,10 @@ function getHouseBill(){
             main.innerHTML=""
         } else {
             if (resJson.payList.data == null){
-                addListTitle(resJson.payList.houseName,resJson.payList.tanantName)
+                addListTitle(resJson.payList.houseName,resJson.payList.tenantName)
             } else {
-                addListTitle(resJson.payList.houseName,resJson.payList.tanantName)
-                createLondloadBillList(resJson.payList.data)
+                addListTitle(resJson.payList.houseName,resJson.payList.tenantName)
+                createLandlordBillList(resJson.payList.data)
                 createBillDetail(resJson.payList.data)
             }
         }
@@ -238,13 +238,13 @@ function createBillDetail(data){
     }
 }
 
-function addListTitle(houseName,tanantName){
+function addListTitle(houseName,tenantName){
     document.getElementById('bill-house-name').textContent = houseName
-    document.getElementById('bill-tanant-name').textContent = tanantName
+    document.getElementById('bill-tenant-name').textContent = tenantName
 }
 
-function createLondloadBillList(data){
-    const listScroll = document.getElementById('londloadpay-scroll')
+function createLandlordBillList(data){
+    const listScroll = document.getElementById('landlordpay-scroll')
     for (i=0;i<data.length;i++){
         const listItem = document.createElement('div');
         const listImgSpan = document.createElement('span');
@@ -324,5 +324,5 @@ function clickDetailBtn(){
 
 function clickFixBtn(data){
     const houseId = window.location.href.split('/')[window.location.href.split('/').length-1]
-    location.replace('/londloadmember/pay/'+ houseId +'/fixbill/'+data.billId)
+    location.replace('/landlordmember/pay/'+ houseId +'/fixbill/'+data.billId)
 }

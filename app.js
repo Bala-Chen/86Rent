@@ -6,8 +6,8 @@ const bodyParser = require('body-parser');
 const mainRoute = require('./controllers/routes/route-controller')
 const memberApi = require('./controllers/routes/member-route');
 const generallyApi = require('./controllers/routes/api-route');
-const londloadApi = require('./controllers/routes/londload-api');
-const tanantApi = require('./controllers/routes/tanant-api');
+const landlordApi = require('./controllers/routes/landlord-api');
+const tenantApi = require('./controllers/routes/tenant-api');
 const RedisStore = require('connect-redis')(session);
 const redisClient = new Redis({host:'redis'});
 const swaggerJsdoc = require('swagger-jsdoc');
@@ -33,8 +33,8 @@ app.use(session({
 }));
 app.use('/api/member',memberApi);
 app.use('/api',generallyApi);
-app.use('/londloadApi',londloadApi);
-app.use('/tanantApi',tanantApi);
+app.use('/landlordApi',landlordApi);
+app.use('/tenantApi',tenantApi);
 
 
 app.get('/',mainRoute.indexView)
@@ -47,29 +47,29 @@ app.get('/signin',mainRoute.signinView)
 
 app.get('/registerch',mainRoute.chooseRegisterView)
 
-app.get('/registerch/londload',mainRoute.registerLondloadView)
+app.get('/registerch/landlord',mainRoute.registerLandlordView)
 
-app.get('/registerch/tanant',mainRoute.registerTanantView)
+app.get('/registerch/tenant',mainRoute.registerTenantView)
 
-app.get('/londloadmember',mainRoute.londloadPageView)
+app.get('/landlordmember',mainRoute.landlordPageView)
 
-app.get('/londloadmember/addhouse',mainRoute.addHouseView)
+app.get('/landlordmember/addhouse',mainRoute.addHouseView)
 
-app.get('/londloadmember/reserve',mainRoute.londloadReserveView)
+app.get('/landlordmember/reserve',mainRoute.landlordReserveView)
 
-app.get('/londloadmember/pay/:houseId',mainRoute.londloadPayList)
+app.get('/landlordmember/pay/:houseId',mainRoute.landlordPayList)
 
-app.get('/londloadmember/pay/:houseId/addbill',mainRoute.londloadAddBill)
+app.get('/landlordmember/pay/:houseId/addbill',mainRoute.landlordAddBill)
 
-app.get('/tanantmember',mainRoute.tanantPageView)
+app.get('/tenantmember',mainRoute.tenantPageView)
 
-app.get('/tanantmember/pay/:houseId',mainRoute.tanantPaylist)
+app.get('/tenantmember/pay/:houseId',mainRoute.tenantPaylist)
 
-app.get('/tanantmember/pay/:houseId/:billId',mainRoute.payPageView)
+app.get('/tenantmember/pay/:houseId/:billId',mainRoute.payPageView)
 
-app.get('/londloadmember/pay/:houseId/fixbill/:billId',mainRoute.fixBillPageView)
+app.get('/landlordmember/pay/:houseId/fixbill/:billId',mainRoute.fixBillPageView)
 
-app.get('/londloadmember/fixhouse/:houseId',mainRoute.fixHouseView)
+app.get('/landlordmember/fixhouse/:houseId',mainRoute.fixHouseView)
 
 
 app.use(function(req, res, next) {

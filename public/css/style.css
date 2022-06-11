@@ -1328,7 +1328,7 @@ button{
     margin-left: 5px;
 }
 
-.londload-info{
+.landlord-info{
     background-color: #D8EEE6;
     margin:20px 0;
     padding: 26px 26px;
@@ -1337,16 +1337,16 @@ button{
     height: 160px;
 }
 
-.londload-name{
+.landlord-name{
     display: flex;
     align-items: center;
 }
 
-.londload-name h4{
+.landlord-name h4{
     margin-left: 12px;
 }
 
-.londload-phonenumber{
+.landlord-phonenumber{
     display: flex;
     align-items: center;
     padding: 5px 14px;
@@ -1357,7 +1357,7 @@ button{
     margin-top: 28px;
 }
 
-.londload-phonenumber h4{
+.landlord-phonenumber h4{
     color: #FFFFFF;
     font-size: 20px;
     margin-left: 10px;

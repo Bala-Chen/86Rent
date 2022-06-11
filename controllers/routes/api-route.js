@@ -10,7 +10,7 @@ generallyApi.get('/houselist',houseList)
 //取得詳細房屋資料(all)
 generallyApi.get('/houseinfo/:houseId',houseInfoPage.houseInfoApi)
 
-//退租(tanant-londload)
+//退租(tenant-landlord)
 generallyApi.delete('/quitRent',memberPage.quitRent)
 
 module.exports = generallyApi

@@ -13,15 +13,15 @@ const houseInfoApi = async(req,res) =>{
     }
     if (req.session.user){
         const email = req.session.user
-        const sql = "SELECT tanant_id,tanant_name FROM tanant_member WHERE tanant_email = ?"
+        const sql = "SELECT tenant_id,tenant_name FROM tenant_member WHERE tenant_email = ?"
         const val = [email,]
         const connection = await Pool.getConnection();
         const result = await Pool.query(connection,sql,val);
         if (result[0]==undefined){
             return res.json({data:{basicInfo:topResult,equipment:equipmentResult,detail:detailResult}})
-        } else if (result[0].tanant_name[0]){
-            const getReserveData = await _getReserveData(result[0].tanant_id,houseID)
-            return res.json({tanantName:result[0].tanant_name,data:{basicInfo:topResult,equipment:equipmentResult,detail:detailResult},reserve:getReserveData})
+        } else if (result[0].tenant_name[0]){
+            const getReserveData = await _getReserveData(result[0].tenant_id,houseID)
+            return res.json({tenantName:result[0].tenant_name,data:{basicInfo:topResult,equipment:equipmentResult,detail:detailResult},reserve:getReserveData})
         }
     } else {
         return res.json({data:{basicInfo:topResult,equipment:equipmentResult,detail:detailResult}})
@@ -118,15 +118,15 @@ const _selectHouseDetail = async(houseID) =>{
 
 const reserveApi = async(req,res) =>{
     const email = req.session.user;
-    const tanantId = await _getTanantId(email)
+    const tenantId = await _getTenantId(email)
     let getOtherQuestion;
     if (req.body.otherQuestion==''){
         getOtherQuestion = '-'
     } else {
         getOtherQuestion = req.body.otherQuestion
     }
-    const sql = "INSERT INTO reserve_list(house_id,tanant_id,reserve_name,reserve_date,reserve_time,reserve_phone,other_question) VALUES (?,?,?,?,?,?,?)"
-    const val = [req.body.houseId,tanantId,req.body.reserveName,req.body.reserveDate,req.body.reserveTime,req.body.reseverPhone,getOtherQuestion]
+    const sql = "INSERT INTO reserve_list(house_id,tenant_id,reserve_name,reserve_date,reserve_time,reserve_phone,other_question) VALUES (?,?,?,?,?,?,?)"
+    const val = [req.body.houseId,tenantId,req.body.reserveName,req.body.reserveDate,req.body.reserveTime,req.body.reseverPhone,getOtherQuestion]
     const connection = await Pool.getConnection();
     try{
         await Pool.beginTransaction(connection);
@@ -138,17 +138,17 @@ const reserveApi = async(req,res) =>{
     return res.json({ok:true})
 }
 
-const _getTanantId = async(email) =>{
-    const sql = "SELECT tanant_id FROM tanant_member WHERE tanant_email = ?"
+const _getTenantId = async(email) =>{
+    const sql = "SELECT tenant_id FROM tenant_member WHERE tenant_email = ?"
     const val = [email,]
     const connection = await Pool.getConnection();
     const result = await Pool.query(connection,sql,val);
-    return result[0].tanant_id
+    return result[0].tenant_id
 }
 
-const _getReserveData = async(tanantID,houseID) =>{
-    const sql = "SELECT reserve_date,reserve_time,reserve_phone,other_question FROM reserve_list WHERE tanant_id = ? AND house_id = ?;"
-    const val = [tanantID,houseID]
+const _getReserveData = async(tenantID,houseID) =>{
+    const sql = "SELECT reserve_date,reserve_time,reserve_phone,other_question FROM reserve_list WHERE tenant_id = ? AND house_id = ?;"
+    const val = [tenantID,houseID]
     const connection = await Pool.getConnection();
     const result = await Pool.query(connection,sql,val);
     if (result[0]!= null){
@@ -166,15 +166,15 @@ const _getReserveData = async(tanantID,houseID) =>{
 
 const updateReserveApi = async(req,res)=>{
     const email = req.session.user;
-    const tanantId = await _getTanantId(email);
+    const tenantId = await _getTenantId(email);
     let getOtherQuestion;
     if (req.body.otherQuestion==''){
         getOtherQuestion = '-'
     } else {
         getOtherQuestion = req.body.otherQuestion
     }
-    const sql = "UPDATE reserve_list SET reserve_date=?,reserve_time=?,reserve_phone=?,other_question=? WHERE house_id = ? AND tanant_id=? ;"
-    const val = [req.body.reserveDate,req.body.reserveTime,req.body.reseverPhone,getOtherQuestion,req.body.houseId,tanantId];
+    const sql = "UPDATE reserve_list SET reserve_date=?,reserve_time=?,reserve_phone=?,other_question=? WHERE house_id = ? AND tenant_id=? ;"
+    const val = [req.body.reserveDate,req.body.reserveTime,req.body.reseverPhone,getOtherQuestion,req.body.houseId,tenantId];
     const connection = await Pool.getConnection();
     try{
         await Pool.beginTransaction(connection);

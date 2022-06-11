@@ -20,7 +20,7 @@ function getUserStatus(){
 
 function getReserveList(){
     const houseId = window.location.href.split('=')[window.location.href.split('=').length-1]
-    fetch('/londloadApi/reserve?house='+houseId)
+    fetch('/landlordApi/reserve?house='+houseId)
     .then((res)=>{
         return res.json()
     })
@@ -33,7 +33,7 @@ function getReserveList(){
 }
 
 function createReserveItem(data){
-    const listScroll = document.getElementById('londload-reserve-listscroll')
+    const listScroll = document.getElementById('landlord-reserve-listscroll')
     for (i=0;i<data.length;i++){
         const listItem = document.createElement('div');
         listItem.className = "house-list-item"
@@ -50,7 +50,7 @@ function createReserveItem(data){
         listDateTimeSpan.textContent = data[i].reserveDate +" "+data[i].reserveTime;
         const listPersonSpan = document.createElement('span');
         listPersonSpan.className = "listblock-minsize";
-        listPersonSpan.textContent = data[i].tanantName;
+        listPersonSpan.textContent = data[i].tenantName;
         const listPhone = document.createElement('span');
         listPhone.className = "listblock-minsize";
         listPhone.textContent = data[i].reservePhone
@@ -66,7 +66,7 @@ function createReserveItem(data){
         listRentOut.className = "listblock-minsize";
         const listRentOutBtn = document.createElement('button');
         listRentOutBtn.className = "cashier-info-btn";
-        listRentOutBtn.id = data[i].tanantId+"-rent-out";
+        listRentOutBtn.id = data[i].tenantId+"-rent-out";
         listRentOutBtn.addEventListener('click',clickRentOutBtn)
         listRentOutBtn.textContent = "租此房客";
         listRentOut.appendChild(listRentOutBtn);
@@ -112,17 +112,17 @@ function createDetailBlock(data){
         reserveTime.appendChild(timeTitle);
         reserveTime.appendChild(timeData);
         const hr1= document.createElement('hr')
-        //tanant
-        const reserveTanant = document.createElement('div');
-        reserveTanant.className="detail-list";
-        const tanantTitle = document.createElement('span');
-        const tanantData = document.createElement('span');
-        tanantTitle.textContent = "預約房客";
-        tanantData.textContent = data[i].tanantName;
-        tanantTitle.className="detail-list-title";
-        tanantData.className="detail-list-data";
-        reserveTanant.appendChild(tanantTitle);
-        reserveTanant.appendChild(tanantData);
+        //tenant
+        const reserveTenant = document.createElement('div');
+        reserveTenant.className="detail-list";
+        const tenantTitle = document.createElement('span');
+        const tenantData = document.createElement('span');
+        tenantTitle.textContent = "預約房客";
+        tenantData.textContent = data[i].tenantName;
+        tenantTitle.className="detail-list-title";
+        tenantData.className="detail-list-data";
+        reserveTenant.appendChild(tenantTitle);
+        reserveTenant.appendChild(tenantData);
         const hr2= document.createElement('hr')
         //phone
         const reservePhone = document.createElement('div');
@@ -164,7 +164,7 @@ function createDetailBlock(data){
         //sum
         detailDataBlock.appendChild(reserveTime);
         detailDataBlock.append(hr1);
-        detailDataBlock.appendChild(reserveTanant);
+        detailDataBlock.appendChild(reserveTenant);
         detailDataBlock.append(hr2);
         detailDataBlock.appendChild(reservePhone);
         detailDataBlock.append(hr3);
@@ -213,16 +213,16 @@ function clickDetailBtn(){
         backBtn.addEventListener('click',()=>{
             cancelReserveMsg.style.display = "none"
         })
-        sureCancelBtn.addEventListener('click',deleteLondloadReserve.bind(null,detailId))
+        sureCancelBtn.addEventListener('click',deleteLandlordReserve.bind(null,detailId))
     })
 }
 
-function deleteLondloadReserve(listId){
+function deleteLandlordReserve(listId){
     document.getElementById('sure-cancel-btn').setAttribute('disabled','disabled');
     setTimeout(()=>{
         document.getElementById('sure-cancel-btn').removeAttribute("disabled")
     },2000)
-    fetch('/londloadApi/reserve',{
+    fetch('/landlordApi/reserve',{
         method:'DELETE',
         headers: {"Content-Type":"application/json"},
         body:JSON.stringify({listID:listId})
@@ -237,7 +237,7 @@ function deleteLondloadReserve(listId){
             const backMemberbtn = document.getElementById('back-member-btn');
             const reloadBtn = document.getElementById('reload-btn');
             backMemberbtn.addEventListener('click',()=>{
-                location.replace('/londloadmember');
+                location.replace('/landlordmember');
             })
             reloadBtn.addEventListener('click',()=>{
                 location.reload();
@@ -247,7 +247,7 @@ function deleteLondloadReserve(listId){
 } 
 
 function clickRentOutBtn(){
-    const getTanantId = this.id.split('-rent-out')[0];
+    const getTenantId = this.id.split('-rent-out')[0];
     const grayBlock = document.getElementById('gray-block');
     const checkRentoutMsg = document.getElementById('check-rentout-msg');
     checkRentoutMsg.style.display =' flex';
@@ -265,19 +265,19 @@ function clickRentOutBtn(){
         checkRentoutMsg.style.display =' none';
         document.body.classList.remove('stop-scroll');
     })
-    sureRentoutBtn.addEventListener('click',rentOut.bind(null,getTanantId))
+    sureRentoutBtn.addEventListener('click',rentOut.bind(null,getTenantId))
 }
 
-function rentOut(tanantId){
+function rentOut(tenantId){
     document.getElementById('sure-rentout-btn').setAttribute("disabled","disabled")
     setTimeout(()=>{
         document.getElementById('sure-rentout-btn').removeAttribute("disabled")
     },2000)
     const houseId = window.location.href.split('=')[window.location.href.split('=').length-1]
-    fetch('/londloadApi/rentOutHouse',{
+    fetch('/landlordApi/rentOutHouse',{
         method:'PUT',
         headers: {"Content-Type":"application/json"},
-        body:JSON.stringify({tanantID:tanantId,houseID:houseId})
+        body:JSON.stringify({tenantID:tenantId,houseID:houseId})
     })
     .then((res)=>{
         return res.json()

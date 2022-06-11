@@ -21,7 +21,7 @@ function getUserStatus(){
 function getBillData(){
     const billId = window.location.href.split('/')[window.location.href.split('/').length-1]
     const houseId = window.location.href.split('/')[window.location.href.split('/').length-2]
-    fetch('/tanantApi/payBill/'+billId)
+    fetch('/tenantApi/payBill/'+billId)
     .then((res)=>{
         return res.json()
     })
@@ -31,11 +31,11 @@ function getBillData(){
             main.innerHTML=""
         } else {
             const payListBtn = document.getElementById('go-paylist-btn');
-            payListBtn.href = "/tanantmember/pay/"+ houseId;
+            payListBtn.href = "/tenantmember/pay/"+ houseId;
             const payPageBtn = document.getElementById('pay-page-btn');
-            payPageBtn.href = "/tanantmember/pay/"+ houseId +"/"+ billId;
+            payPageBtn.href = "/tenantmember/pay/"+ houseId +"/"+ billId;
             document.getElementById('gray-back-btn').addEventListener('click',()=>{
-                location.replace("/tanantmember/pay/"+ houseId)
+                location.replace("/tenantmember/pay/"+ houseId)
             })
             createBillDetail(resJson.billData)
             document.getElementById('paypage-price').textContent = "$ "+resJson.billData.totalPrice;
@@ -329,7 +329,7 @@ function onSubmit(e) {
         setTimeout(()=>{
             paySubmit.removeAttribute("disabled")
         },1000)
-        fetch('/tanantApi/payBill',{
+        fetch('/tenantApi/payBill',{
             method:'POST',
             headers: {"Content-Type":"application/json"},
             body: JSON.stringify({prime:prime,billId:billId,cardName:cardName,totalPrice:totalPrice,houseId:houseId})
@@ -346,7 +346,7 @@ function onSubmit(e) {
                 grayBlock.style.display = "block";
                 paySuccessMsg.style.display = "flex";
                 backMember.addEventListener('click',()=>{
-                    location.replace('/tanantmember/pay/'+houseId)
+                    location.replace('/tenantmember/pay/'+houseId)
                 })
             } else {
                 const payFailMsg = document.getElementById('pay-fail-msg');
@@ -355,7 +355,7 @@ function onSubmit(e) {
                 grayBlock.style.display = "block";
                 payFailMsg.style.display = "flex";
                 backPaylist.addEventListener('click',()=>{
-                    location.replace('/tanantmember/pay/'+houseId)
+                    location.replace('/tenantmember/pay/'+houseId)
                 })
             }
         })

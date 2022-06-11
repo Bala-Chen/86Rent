@@ -24,22 +24,22 @@ const registerApi = async(req,res)=>{
         return res.json({error:true, msg: '此Email已被註冊過'})
     }
     const reqUrl = req.headers.referer;
-    if (reqUrl.split('/')[reqUrl.split('/').length-1] == "londload"){
-        const londloadId = "L" + _createID();
-        const sql = "INSERT INTO londload_member VALUES(?,?,?,?,?,?)"
-        await _insertMemberData(req,londloadId,sql)
+    if (reqUrl.split('/')[reqUrl.split('/').length-1] == "landlord"){
+        const landlordId = "L" + _createID();
+        const sql = "INSERT INTO landlord_member VALUES(?,?,?,?,?,?)"
+        await _insertMemberData(req,landlordId,sql)
         
-    } else if (reqUrl.split('/')[reqUrl.split('/').length-1] == "tanant"){
-        const tanantId = "T" + _createID();
-        const sql = "INSERT INTO tanant_member VALUES(?,?,?,?,?,?)"
-        await _insertMemberData(req,tanantId,sql)
+    } else if (reqUrl.split('/')[reqUrl.split('/').length-1] == "tenant"){
+        const tenantId = "T" + _createID();
+        const sql = "INSERT INTO tenant_member VALUES(?,?,?,?,?,?)"
+        await _insertMemberData(req,tenantId,sql)
     }
     return res.json({ok:true}) 
 }
 
 const _selectEmail = async(email)=>{
     const connection = await Pool.getConnection();
-    const sql = "SELECT londload_email AS email FROM londload_member WHERE londload_email= ? UNION SELECT tanant_email FROM tanant_member WHERE tanant_email= ? ;"
+    const sql = "SELECT landlord_email AS email FROM landlord_member WHERE landlord_email= ? UNION SELECT tenant_email FROM tenant_member WHERE tenant_email= ? ;"
     const val = [email,email]
     const result = await Pool.query(connection,sql,val);
     if (result[0]== undefined){
@@ -63,7 +63,7 @@ const _insertMemberData = async(req,id,sqlIn)=>{
     const valueIn = [id,req.body.email,pwdHash,req.body.allname,req.body.gender,req.body.cellphone]
     const connection = await Pool.getConnection();
     if (id[0]=="L"){
-        const addAmountsql = "INSERT INTO londload_account(londload_id) VALUES (?);"
+        const addAmountsql = "INSERT INTO landlord_account(landlord_id) VALUES (?);"
         try{
             await Pool.beginTransaction(connection);
             await Pool.query(connection,sqlIn,valueIn);
@@ -85,7 +85,7 @@ const _insertMemberData = async(req,id,sqlIn)=>{
 
 const signinApi = async(req,res) =>{
     const connection = await Pool.getConnection();
-    const sql = "SELECT londload_password AS password FROM londload_member WHERE londload_email = ? UNION SELECT tanant_password FROM tanant_member WHERE tanant_email = ? ";
+    const sql = "SELECT landlord_password AS password FROM landlord_member WHERE landlord_email = ? UNION SELECT tenant_password FROM tenant_member WHERE tenant_email = ? ";
     const val = [req.body.email,req.body.email];
     const result = await Pool.query(connection,sql,val);
     if (result[0] == undefined){
@@ -112,7 +112,7 @@ const memberStatusApi = async(req,res)=>{
     if(req.session.user != null){
         const connection = await Pool.getConnection();
         const email = req.session.user;
-        const sql = "SELECT londload_id AS id,londload_name AS name FROM londload_member WHERE londload_email = ? UNION SELECT tanant_id, tanant_name FROM tanant_member WHERE tanant_email = ?;"
+        const sql = "SELECT landlord_id AS id,landlord_name AS name FROM landlord_member WHERE landlord_email = ? UNION SELECT tenant_id, tenant_name FROM tenant_member WHERE tenant_email = ?;"
         const val = [email,email]
         const result = await Pool.query(connection,sql,val);
         return res.json({data:{id:result[0].id,name:result[0].name,email:email}})

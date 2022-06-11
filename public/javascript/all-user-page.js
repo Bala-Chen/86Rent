@@ -2,19 +2,19 @@ const url = window.location.href;
 const urlFinal = url.split('/')[url.split('/').length-1]
 getUserStatus()
 
-if (urlFinal=="londload"){
-    const londloadForm = document.getElementById("londload-register-form");
-    londloadForm.addEventListener("submit",(e)=>{
+if (urlFinal=="landlord"){
+    const landlordForm = document.getElementById("landlord-register-form");
+    landlordForm.addEventListener("submit",(e)=>{
         e.preventDefault();
  
-        submitData("londload")
+        submitData("landlord")
     })
-} else if(urlFinal=="tanant"){
-    const tanantForm = document.getElementById("tanant-register-form");
-    tanantForm.addEventListener("submit",(e)=>{
+} else if(urlFinal=="tenant"){
+    const tenantForm = document.getElementById("tenant-register-form");
+    tenantForm.addEventListener("submit",(e)=>{
         e.preventDefault();
  
-        submitData("tanant")
+        submitData("tenant")
     })
 } else if(urlFinal=="signin"){
     const signinForm = document.getElementById("signin-form");
@@ -120,9 +120,9 @@ function getUserStatus(){
                 memberpageBtn.addEventListener("click",()=>{
                     const id = resJson.data.id;
                     if(id.slice(0,1)=="T"){
-                        location.replace('/tanantmember')
+                        location.replace('/tenantmember')
                     } else if(id.slice(0,1)=="L"){
-                        location.replace('/londloadmember')
+                        location.replace('/landlordmember')
                     }
                 })
                 if (url.includes('houseinfo')){
@@ -138,7 +138,7 @@ function getUserStatus(){
                         reservationForm.style.display="none";
                         registerMessage.style.display="block";
                         document.getElementById('check-register-btn').addEventListener('click',()=>{
-                            location.replace('/registerch/tanant')
+                            location.replace('/registerch/tenant')
                         })
                     }
                 } 
@@ -161,7 +161,7 @@ function getUserStatus(){
                 reservationForm.style.display="none";
                 registerMessage.style.display="block";
                 document.getElementById('check-register-btn').addEventListener('click',()=>{
-                    location.replace('/registerch/tanant')
+                    location.replace('/registerch/tenant')
                 })
             }
         }

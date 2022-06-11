@@ -32,47 +32,47 @@
                     <span>></span>
                     <a href="/registerch">會員註冊</a>
                     <span>></span>
-                    <a href="/registerch/tanant">註冊為房客</a>
+                    <a href="/registerch/tenant">註冊為房客</a>
                 </div>
                 <div class="register-block">
                     <div class="register-form">
                         <h2>註冊為房客</h2>
-                        <form id="tanant-register-form">
+                        <form id="tenant-register-form">
                             <div class="one-input">
-                                <label for="tanant-email">帳號(email)</label>
-                                <input type="email" name="username" id="tanant-email" pattern="[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+" placeholder="請輸入註冊信箱(example@gmail.com)" required>
+                                <label for="tenant-email">帳號(email)</label>
+                                <input type="email" name="username" id="tenant-email" pattern="[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+" placeholder="請輸入註冊信箱(example@gmail.com)" required>
                             </div>
                             <div class="one-input">
-                                <label for="tanant-pwd">密碼</label>
-                                <input type="password" name="password" id="tanant-pwd" minlength="8" maxlength="25" placeholder="請輸入註冊密碼(請以半形輸入，最少8個英、數字組合)" required>
+                                <label for="tenant-pwd">密碼</label>
+                                <input type="password" name="password" id="tenant-pwd" minlength="8" maxlength="25" placeholder="請輸入註冊密碼(請以半形輸入，最少8個英、數字組合)" required>
                             </div>
                             <div class="one-input">
-                                <label for="tanant-pwd-check">密碼確認</label>
-                                <input type="password" name="password" id="tanant-pwd-check" minlength="8" maxlength="25" placeholder="請再次輸入註冊密碼" required>
+                                <label for="tenant-pwd-check">密碼確認</label>
+                                <input type="password" name="password" id="tenant-pwd-check" minlength="8" maxlength="25" placeholder="請再次輸入註冊密碼" required>
                             </div>
                             <div class="two-input">
                                 <label>註冊姓名</label>
                                 <div>
-                                    <input type="text" class="two-input-1" name="first-name" id="tanant-firstname" placeholder="姓" maxlength="2" required> 
-                                    <input type="text" name="last-name" id="tanant-lastname" placeholder="名" maxlength="4" required>
+                                    <input type="text" class="two-input-1" name="first-name" id="tenant-firstname" placeholder="姓" maxlength="2" required> 
+                                    <input type="text" name="last-name" id="tenant-lastname" placeholder="名" maxlength="4" required>
                                 </div>
                             </div>
                             <div class="two-radio">
                                 <p>性別</p>
-                                <input type="radio" class="form-check-input" name="tanant-gender" id="male" value="male" checked>
+                                <input type="radio" class="form-check-input" name="tenant-gender" id="male" value="male" checked>
                                 <label for="male">男</label>
-                                <input type="radio" class="form-check-input" name="tanant-gender" id="female" value="female">
+                                <input type="radio" class="form-check-input" name="tenant-gender" id="female" value="female">
                                 <label for="female">女</label>
                             </div>
                             <div class="one-input">
-                                <label for="tanant-cellphone">手機號碼</label>
-                                <input type="text" name="phone" id="tanant-cellphone" maxlength="20" placeholder="請輸入手機號碼(0900-000-000)" pattern="09\d{2}(-\d{3}-\d{3})" required>
+                                <label for="tenant-cellphone">手機號碼</label>
+                                <input type="text" name="phone" id="tenant-cellphone" maxlength="20" placeholder="請輸入手機號碼(0900-000-000)" pattern="09\d{2}(-\d{3}-\d{3})" required>
                             </div>
                             <div class="g-recaptcha" data-sitekey="6LfDIXIfAAAAAGNvxizA-dspEPN6-KmOB8psSiu1"></div>
                             <div class="register-submit">
                                 <button type="submit">註冊</button>
                             </div>
-                            <div class="error-msg" id="tanant-error-msg"></div>
+                            <div class="error-msg" id="tenant-error-msg"></div>
                         </form>
                     </div>
                 </div>

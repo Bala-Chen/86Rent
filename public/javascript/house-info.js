@@ -15,7 +15,7 @@ function showHouseInfo(){
             equipmentBlock(resJson.data.equipment)
             detailBlock(resJson.data)
             createRemark(resJson.data.detail.remark)
-            if (resJson.tanantName){
+            if (resJson.tenantName){
                 const updateReserveForm = document.getElementById('update-reserve-form')
                 const reservationForm = document.getElementById('reservation-form');
                 if(resJson.reserve != null){
@@ -30,7 +30,7 @@ function showHouseInfo(){
                     //沒預約過
                     updateReserveForm.style.display = "none";
                     reservationForm.style.display="block";
-                    document.getElementById('member-name').value = resJson.tanantName;
+                    document.getElementById('member-name').value = resJson.tenantName;
                     insertReserve()
                 }
             }
@@ -116,33 +116,33 @@ function topRightInfo(data){
     housePriceArea.appendChild(priceH3);
     housePriceArea.appendChild(unit);
     housePriceArea.appendChild(depositMonth);
-    const londloadInfo = document.createElement('div');
-    londloadInfo.className = "londload-info";
-    const londloadName = document.createElement('div');
-    londloadName.className = "londload-name";
+    const landlordInfo = document.createElement('div');
+    landlordInfo.className = "landlord-info";
+    const landlordName = document.createElement('div');
+    landlordName.className = "landlord-name";
     const personIcon = document.createElement('img');
     personIcon.src="/public/images/member icon.png";
     const houseUser = document.createElement('h4');
     houseUser.textContent = data.contactName +" "+data.callName;
-    londloadName.appendChild(personIcon);
-    londloadName.appendChild(houseUser);
-    const londloadPhoneNumber = document.createElement('div');
-    londloadPhoneNumber.className="londload-phonenumber";
+    landlordName.appendChild(personIcon);
+    landlordName.appendChild(houseUser);
+    const landlordPhoneNumber = document.createElement('div');
+    landlordPhoneNumber.className="landlord-phonenumber";
     const phoneIcon = document.createElement('img');
     phoneIcon.src="/public/images/phone_icon.png";
     const phoneNumber = document.createElement('h4');
     phoneNumber.textContent = data.contactCellphone;
-    londloadPhoneNumber.appendChild(phoneIcon);
-    londloadPhoneNumber.appendChild(phoneNumber);
-    londloadInfo.appendChild(londloadName);
-    londloadInfo.appendChild(londloadPhoneNumber);
+    landlordPhoneNumber.appendChild(phoneIcon);
+    landlordPhoneNumber.appendChild(phoneNumber);
+    landlordInfo.appendChild(landlordName);
+    landlordInfo.appendChild(landlordPhoneNumber);
     houseToprightInfo.appendChild(houseH2);
     houseToprightInfo.appendChild(houseTagUl);
     houseToprightInfo.appendChild(houseH4);
     houseToprightInfo.appendChild(houseP);
     houseToprightInfo.appendChild(pattrenP);
     houseToprightInfo.appendChild(housePriceArea);
-    houseToprightInfo.appendChild(londloadInfo)
+    houseToprightInfo.appendChild(landlordInfo)
 }
 
 function currentSlide(n) {
@@ -550,7 +550,7 @@ function insertReserve(){
             setTimeout(()=>{
                 checkReserveBtn.removeAttribute("disabled")
             },2000)
-            fetch('/tanantApi/reserve',{
+            fetch('/tenantApi/reserve',{
                 method:'POST',
                 headers: {"Content-Type":"application/json"},
                 body:JSON.stringify({houseId:houseId,reserveName:memberNameInput,reserveDate:inputDateTime[0],reserveTime:inputDateTime[1],reseverPhone:inputMemberPhone,otherQuestion:inputOtherQuestion})
@@ -571,7 +571,7 @@ function insertReserve(){
                         location.reload();
                     });
                     goMemberBtn.addEventListener('click',()=>{
-                        location.replace('/tanantmember')
+                        location.replace('/tenantmember')
                     })
                     grayblock.addEventListener("click",cancelBlock);
                 }
@@ -598,7 +598,7 @@ function updateReserve(){
             setTimeout(()=>{
                 UpdateReserveBtn.removeAttribute("disabled")
             },2000)
-            fetch('/tanantApi/reserve',{
+            fetch('/tenantApi/reserve',{
                 method:'PUT',
                 headers: {"Content-Type":"application/json"},
                 body:JSON.stringify({houseId:houseId,reserveDate:inputDateTime[0],reserveTime:inputDateTime[1],reseverPhone:inputMemberPhone,otherQuestion:inputOtherQuestion})
@@ -619,7 +619,7 @@ function updateReserve(){
                         location.reload();
                     });
                     goMemberBtn.addEventListener('click',()=>{
-                        location.replace('/tanantmember')
+                        location.replace('/tenantmember')
                     })
                     grayblock.addEventListener("click",cancelBlock);
                 }

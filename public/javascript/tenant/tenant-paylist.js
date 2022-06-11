@@ -20,7 +20,7 @@ function getUserStatus(){
 
 function getHouseBill(){
     const houseId = window.location.href.split('/')[window.location.href.split('/').length-1]
-    fetch('/tanantApi/pay/'+houseId)
+    fetch('/tenantApi/pay/'+houseId)
     .then((res)=>{
         return res.json()
     })
@@ -30,26 +30,26 @@ function getHouseBill(){
             main.innerHTML=""
         } else {
             const payListBtn = document.getElementById('go-paylist-btn');
-            payListBtn.href = "/tanantmember/pay/"+ houseId;
+            payListBtn.href = "/tenantmember/pay/"+ houseId;
             if (resJson.payList.data == null){
-                addListTitle(resJson.payList.houseName,resJson.payList.londloadName,resJson.payList.londloadPhone)
+                addListTitle(resJson.payList.houseName,resJson.payList.landlordName,resJson.payList.landlordPhone)
             } else {
-                addListTitle(resJson.payList.houseName,resJson.payList.londloadName,resJson.payList.londloadPhone)
-                createLondloadBillList(resJson.payList.data)
+                addListTitle(resJson.payList.houseName,resJson.payList.landlordName,resJson.payList.landlordPhone)
+                createLandlordBillList(resJson.payList.data)
                 createBillDetail(resJson.payList.data)
             }
         }
     }) 
 }
 
-function addListTitle(houseName,londloadName,londloadPhone){
+function addListTitle(houseName,landlordName,landlordPhone){
     document.getElementById('bill-house-name').textContent = houseName
-    document.getElementById('bill-londload-name').textContent = londloadName
-    document.getElementById('bill-londload-phone').textContent = londloadPhone
+    document.getElementById('bill-landlord-name').textContent = landlordName
+    document.getElementById('bill-landlord-phone').textContent = landlordPhone
 }
 
-function createLondloadBillList(data){
-    const listScroll = document.getElementById('tanantpay-scroll')
+function createLandlordBillList(data){
+    const listScroll = document.getElementById('tenantpay-scroll')
     for (i=0;i<data.length;i++){
         const listItem = document.createElement('div');
         const listImgSpan = document.createElement('span');
@@ -321,5 +321,5 @@ function clickDetailBtn(){
 function goPagPage(){
     const getBillId = this.id.split('-paypage-btn')[0];
     const houseId = window.location.href.split('/')[window.location.href.split('/').length-1]
-    location.replace('/tanantmember/pay/'+houseId+'/'+getBillId)
+    location.replace('/tenantmember/pay/'+houseId+'/'+getBillId)
 }

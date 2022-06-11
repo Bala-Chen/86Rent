@@ -20,8 +20,8 @@ function getUserStatus(){
 
 function getValue(){
     const houseId = window.location.href.split('/')[window.location.href.split('/').length-1];
-    document.getElementById('fix-href').href="/londloadmember/fixhouse/"+houseId
-    fetch('/londloadApi/house?houseId='+houseId)
+    document.getElementById('fix-href').href="/landlordmember/fixhouse/"+houseId
+    fetch('/landlordApi/house?houseId='+houseId)
     .then((res)=>{
         return res.json()
     })
@@ -190,7 +190,7 @@ function updateValue(e){
         houseArea:document.getElementById('house-area').value,
         commentArea:document.getElementById('remark').value
     }
-    fetch('/londloadApi/house',{
+    fetch('/landlordApi/house',{
         method:'PUT',
         headers: {"Content-Type":"application/json"},
         body:JSON.stringify({houseId:houseID,data:data})
@@ -205,7 +205,7 @@ function updateValue(e){
             msg.style.display = 'flex';
             grayBlock.style.display = 'block';
             document.getElementById('go-member-btn').addEventListener('click',()=>{
-                location.replace('/londloadmember')
+                location.replace('/landlordmember')
             })
             document.getElementById('go-houseinfo-btn').addEventListener('click',()=>{
                 location.replace('/houseinfo/'+houseID)

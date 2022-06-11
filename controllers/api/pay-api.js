@@ -39,13 +39,13 @@ function _createId(){
     return tenNum
 }
 
-const londloadPay = async(req,res)=>{
+const landlordPay = async(req,res)=>{
     const houseId = req.params.houseId;
     const val = [houseId,]
-    const titleSql ="SELECT house_name,tanant_name \
+    const titleSql ="SELECT house_name,tenant_name \
     FROM already_rented AS ar \
     LEFT JOIN housing_info AS hi ON ar.house_id = hi.house_id \
-    LEFT JOIN tanant_member AS tm ON ar.tanant_id=tm.tanant_id \
+    LEFT JOIN tenant_member AS tm ON ar.tenant_id=tm.tenant_id \
     WHERE ar.house_id = ?;"
     const connection1 = await Pool.getConnection();
     const titleResult = await Pool.query(connection1,titleSql,val);
@@ -59,7 +59,7 @@ const londloadPay = async(req,res)=>{
         const connection = await Pool.getConnection();
         const result = await Pool.query(connection,sql,val);
         if (result[0]== undefined){
-            return res.json({payList:{houseName:titleResult[0].house_name,tanantName:titleResult[0].tanant_name,data:null}})
+            return res.json({payList:{houseName:titleResult[0].house_name,tenantName:titleResult[0].tenant_name,data:null}})
         } else {
             let dataList = [];
             for (i=0;i<result.length;i++){
@@ -90,7 +90,7 @@ const londloadPay = async(req,res)=>{
                 }
                 dataList.push(data)                
             }
-            return res.json({payList:{houseName:titleResult[0].house_name,tanantName:titleResult[0].tanant_name,data:dataList}})
+            return res.json({payList:{houseName:titleResult[0].house_name,tenantName:titleResult[0].tenant_name,data:dataList}})
         }
     }
 }
@@ -104,13 +104,13 @@ const _timeStampToDate = (timestamp) =>{
     return fullDate
 }
 
-const tanantPay = async(req,res)=>{
+const tenantPay = async(req,res)=>{
     const houseId = req.params.houseId;
     const val = [houseId,]
-    const titleSql ="SELECT house_name,londload_name,londload_cellphone \
+    const titleSql ="SELECT house_name,landlord_name,landlord_cellphone \
     FROM already_rented AS ar \
     LEFT JOIN housing_info AS hi ON ar.house_id = hi.house_id \
-    LEFT JOIN londload_member AS lm ON ar.londload_id=lm.londload_id \
+    LEFT JOIN landlord_member AS lm ON ar.landlord_id=lm.landlord_id \
     WHERE ar.house_id = ?;"
     const connection1 = await Pool.getConnection();
     const titleResult = await Pool.query(connection1,titleSql,val);
@@ -124,7 +124,7 @@ const tanantPay = async(req,res)=>{
         const connection = await Pool.getConnection();
         const result = await Pool.query(connection,sql,val);
         if (result[0]== undefined){
-            return res.json({payList:{houseName:titleResult[0].house_name,londloadName:titleResult[0].londload_name,londloadPhone:titleResult[0].londload_cellphone,data:null}})
+            return res.json({payList:{houseName:titleResult[0].house_name,landlordName:titleResult[0].landlord_name,landlordPhone:titleResult[0].landlord_cellphone,data:null}})
         } else {
             let dataList = [];
             for (i=0;i<result.length;i++){
@@ -155,7 +155,7 @@ const tanantPay = async(req,res)=>{
                 }
                 dataList.push(data)                
             }
-            return res.json({payList:{houseName:titleResult[0].house_name,londloadName:titleResult[0].londload_name,londloadPhone:titleResult[0].londload_cellphone,data:dataList}})
+            return res.json({payList:{houseName:titleResult[0].house_name,landlordName:titleResult[0].landlord_name,landlordPhone:titleResult[0].landlord_cellphone,data:dataList}})
         }
     }
 }
@@ -186,17 +186,17 @@ const getPayBill = async(req,res)=>{
     return res.json({billData:data})
 }
 
-const _getTanantPhone = async(email) =>{
-    sql = "SELECT tanant_cellphone FROM tanant_member WHERE tanant_email=?;"
+const _getTenantPhone = async(email) =>{
+    sql = "SELECT tenant_cellphone FROM tenant_member WHERE tenant_email=?;"
     val = [email,]
     const connection = await Pool.getConnection();
     const result = await Pool.query(connection,sql,val);
-    return result[0].tanant_cellphone;
+    return result[0].tenant_cellphone;
 }
 
 const postToTappay = async(req,res)=>{
     const email = req.session.user;
-    const tanantPhone = await _getTanantPhone(email)
+    const tenantPhone = await _getTenantPhone(email)
     const tappayData = {
         "prime": req.body.prime,
         "partner_key":process.env.PARTNER_KEY,
@@ -205,7 +205,7 @@ const postToTappay = async(req,res)=>{
         "details":"86rent house bill",
         "amount": parseInt(req.body.totalPrice),
         "cardholder": {
-            "phone_number": tanantPhone,
+            "phone_number": tenantPhone,
             "name": req.body.cardName,
             "email": email
         }
@@ -219,19 +219,19 @@ const postToTappay = async(req,res)=>{
     .then(res => res.json());
 
     if (result.status==0 && result.msg =="Success"){
-        const selectLondloadSql = "SELECT total,londload_id, account_amount FROM rentbill_list \
+        const selectLandlordSql = "SELECT total,landlord_id, account_amount FROM rentbill_list \
         NATURAL JOIN already_rented \
-        NATURAL JOIN londload_account \
+        NATURAL JOIN landlord_account \
         WHERE house_id = ? AND bill_id = ?;"
-        const selectLondloadVal = [req.body.houseId,req.body.billId]
+        const selectLandlordVal = [req.body.houseId,req.body.billId]
         const selectConnection = await Pool.getConnection();
-        const selectResult = await Pool.query(selectConnection,selectLondloadSql,selectLondloadVal)
+        const selectResult = await Pool.query(selectConnection,selectLandlordSql,selectLandlordVal)
         const addNow = Date.now();
         const newTotal = Number(selectResult[0].account_amount + selectResult[0].total);
         const updateBillSql = "UPDATE rentbill_list SET status='O', pay_time=? WHERE bill_id = ?;"
         const updateBillVal = [addNow,req.body.billId];
-        const updateAmountSql = "UPDATE londload_account SET account_amount=? WHERE londload_id = ?"
-        const updateAmountVal = [newTotal,selectResult[0].londload_id]
+        const updateAmountSql = "UPDATE landlord_account SET account_amount=? WHERE landlord_id = ?"
+        const updateAmountVal = [newTotal,selectResult[0].landlord_id]
         const connection = await Pool.getConnection();
         try{
             await Pool.beginTransaction(connection);
@@ -306,8 +306,8 @@ const getPrice = async(req,res) =>{
 
 module.exports = {
     addRentBill:addRentBill,
-    londloadPay:londloadPay,
-    tanantPay:tanantPay,
+    landlordPay:landlordPay,
+    tenantPay:tenantPay,
     getPayBill:getPayBill,
     postToTappay:postToTappay,
     updateRentBill:updateRentBill,

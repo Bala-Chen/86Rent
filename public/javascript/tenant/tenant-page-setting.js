@@ -1,4 +1,4 @@
-//tanant member page
+//tenant member page
 const myHouseBtn = document.getElementById('my-rent-house');
 const reserveBtn = document.getElementById('reserve-house');
 
@@ -38,26 +38,26 @@ function getUserStatus(){
         } else if(resJson.data.id[0] !="T"){
             location.replace('/');
         } else if(resJson.data.id[0] =="T"){
-            getTanantRentList()
+            getTenantRentList()
             getReserveList()
         }
     })
 };
 
 function getReserveList(){
-    fetch('/tanantApi/reserve')
+    fetch('/tenantApi/reserve')
     .then((res)=>{
         return res.json()
     })
     .then((resJson)=>{
         if (resJson.data != null){
-            createTanantReserveItem(resJson.data)
+            createTenantReserveItem(resJson.data)
         }
     })
 }
 
-function getTanantRentList(){
-    fetch('/tanantApi/rentedList')
+function getTenantRentList(){
+    fetch('/tenantApi/rentedList')
     .then((res)=>{
         return res.json()
     })
@@ -87,9 +87,9 @@ function createRentItem(data){
         const listDate = document.createElement('span');
         listDate.className = "listblock-minsize";
         listDate.textContent = data[i].buildDate;
-        const listLondload = document.createElement('span');
-        listLondload.className = "listblock-minsize";
-        listLondload.textContent = data[i].londloadName;
+        const listLandlord = document.createElement('span');
+        listLandlord.className = "listblock-minsize";
+        listLandlord.textContent = data[i].landlordName;
         const listPayInfo = document.createElement('span');
         listPayInfo.className = "listblock-minsize";
         if (data[i].status == "X"){
@@ -101,7 +101,7 @@ function createRentItem(data){
         listPayInfoBtn.className = "cashier-info-btn";
         listPayInfoBtn.id = data[i].houseId+'-paylist';
         listPayInfoBtn.textContent = "繳款詳情";
-        listPayInfoBtn.addEventListener('click',goTanantPaylist)
+        listPayInfoBtn.addEventListener('click',goTenantPaylist)
         listPayInfo.appendChild(listPayInfoBtn);
         const listQuitSpan = document.createElement('span');
         listQuitSpan.className = "listblock-minsize";
@@ -115,15 +115,15 @@ function createRentItem(data){
         listItem.appendChild(listTitleSpan);
         listItem.appendChild(listRentPriceSpan);
         listItem.appendChild(listDate);
-        listItem.appendChild(listLondload);
+        listItem.appendChild(listLandlord);
         listItem.appendChild(listPayInfo);
         listItem.appendChild(listQuitSpan);
         listScroll.appendChild(listItem)
     }
 }
 
-function createTanantReserveItem(data){
-    const listScroll = document.getElementById('tanant-reserve-listscroll')
+function createTenantReserveItem(data){
+    const listScroll = document.getElementById('tenant-reserve-listscroll')
     for (i=0;i<data.length;i++){
         const listItem = document.createElement('div');
         listItem.className = "house-list-item"
@@ -146,7 +146,7 @@ function createTanantReserveItem(data){
         listDateTimeSpan.textContent = data[i].reserveDate +" "+data[i].reserveTime;
         const listPersonSpan = document.createElement('span');
         listPersonSpan.className = "listblock-minsize";
-        listPersonSpan.textContent = data[i].londloadCallName;
+        listPersonSpan.textContent = data[i].landlordCallName;
         const listPhone = document.createElement('span');
         listPhone.className = "listblock-minsize";
         listPhone.textContent = data[i].contactCellphone;
@@ -195,7 +195,7 @@ function deleteReserve(houseID){
     setTimeout(()=>{
         document.getElementById('sure-cancel-btn').removeAttribute("disabled")
     },1000)
-    fetch('/tanantApi/reserve',{
+    fetch('/tenantApi/reserve',{
         method:'DELETE',
         headers: {"Content-Type":"application/json"},
         body:JSON.stringify({houseId:houseID})
@@ -209,15 +209,15 @@ function deleteReserve(houseID){
             cancelOkMsg.style.display='flex';
             const backMemberbtn = document.getElementById('back-member-btn');
             backMemberbtn.addEventListener('click',()=>{
-                location.replace('/tanantmember');
+                location.replace('/tenantmember');
             })
         }
     })
 }
 
-function goTanantPaylist(){
+function goTenantPaylist(){
     const houseID = this.id.split('-paylist')[0]
-    location.replace("/tanantmember/pay/"+houseID)
+    location.replace("/tenantmember/pay/"+houseID)
 }
 
 function quitRent(){
