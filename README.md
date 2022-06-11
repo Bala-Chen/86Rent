@@ -28,6 +28,12 @@ CreditCard CVV：123 <br>
 - 串接TapPay SDK實現租金繳款功能
 - 串接Google reCAPTCHA驗證是否為機器人
 
+## 後端架構圖
+![Imgur](https://i.imgur.com/3KpbMQP.jpg)
+
+## 資料庫架構圖
+![Imgur](https://i.imgur.com/0ExOf0k.png)
+
 ## 功能介紹
 
 ### 首頁搜尋
@@ -57,7 +63,7 @@ CreditCard CVV：123 <br>
 - 我的帳戶
     - 可以查看因繳交房屋而入帳的金額，並可申請提款
 ![Imgur](https://i.imgur.com/IWLs2dk.png)
-![Imgur](https://i.imgur.com/8h1HXiS.png)
+![Imgur](https://i.imgur.com/LLUlgnP.png)
 ![Imgur](https://i.imgur.com/mJkpsgm.png)
 ![Imgur](https://i.imgur.com/eoNtcq7.png)
 ### 房客會員系統
@@ -68,5 +74,5 @@ CreditCard CVV：123 <br>
 - 預約看屋管理
     - 可以查看所有正在預約中的房屋時間資訊及房東聯絡電話
     - 點擊取消可取消該房屋的看屋預約
-![Imgur](https://i.imgur.com/6KqXfv5.png)
+![Imgur](https://i.imgur.com/CXqz1rT.png)
 ![Imgur](https://i.imgur.com/gKFIUov.png)
