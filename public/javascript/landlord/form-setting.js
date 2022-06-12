@@ -97,3 +97,36 @@ function getUserStatus(){
         }
     })
 };
+
+function updateValue(e){
+    e.preventDefault();
+    document.getElementById('form-submit').setAttribute("disabled","disabled");
+    setTimeout(()=>{
+        document.getElementById('form-submit').removeAttribute("disabled")
+    },5000)
+    const formValues = document.querySelector('form')
+    const formData = new FormData(formValues);
+    fetch('/landlordApi/house',{
+        method:'POST',
+        body:formData
+    })
+    .then((res)=>{
+        return res.json()
+    })
+    .then((resJson)=>{
+        if (resJson.ok){
+            const msg = document.getElementById('addhouse-success-msg');
+            const grayBlock = document.getElementById('gray-block');
+            msg.style.display = 'flex';
+            grayBlock.style.display = 'block';
+            document.getElementById('go-member-btn').addEventListener('click',()=>{
+                location.replace('/landlordmember')
+            })
+            document.getElementById('go-houseinfo-btn').addEventListener('click',()=>{
+                location.replace('/houseinfo/'+resJson.houseId)
+            })
+        } else {
+            document.getElementById('err-msg').textContent = resJson.msg;
+        }
+    })
+}

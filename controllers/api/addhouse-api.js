@@ -17,6 +17,9 @@ const addhouseApi = async(req,res)=>{
     const resultId = await _selectLandlordId(req.session.user)
     const houseId = "H"+_createId();
     const connection = await Pool.getConnection();
+    if (req.files.length == 0){
+        return res.json({error:true,msg:"請務必加入一張圖片"})
+    }
     try{
         await Pool.beginTransaction(connection);
         await _insertHousePerson(connection,req.body,houseId,resultId);
@@ -30,9 +33,8 @@ const addhouseApi = async(req,res)=>{
         await Pool.commit(connection);
     } catch(err){
         await Pool.rollback(connection,err);
-    } finally {
-        res.redirect('/landlordmember')
     }
+    return res.json({ok:true,houseId:houseId})
 }
 
 const _selectLandlordId= async(email) => {
@@ -71,7 +73,7 @@ const _insertHouseInfo = async(connection,data,houseId) =>{
 }
 
 const _checkDataUndefined = (data)=>{
-    if (data == undefined){
+    if (data == undefined || data == 0){
         return "-"
     } else {
         return data
@@ -79,9 +81,15 @@ const _checkDataUndefined = (data)=>{
 }
 
 const _insertHouseTag = async(connection,data,houseId) => {
-    for (i=0; i<data.length;i++){
+    if (data != null){
+        for (i=0; i<data.length;i++){
+            const sqlIn = "INSERT INTO housetag_list(house_id,tag_id) VALUES (?,?);"
+            const valueIn = [houseId,data[i]]
+            await Pool.query(connection,sqlIn,valueIn)
+        }
+    } else {
         const sqlIn = "INSERT INTO housetag_list(house_id,tag_id) VALUES (?,?);"
-        const valueIn = [houseId,data[i]]
+        const valueIn = [houseId,15]
         await Pool.query(connection,sqlIn,valueIn)
     }
 }
@@ -94,9 +102,15 @@ const _insertHouseEquipement = async(connection,data,houseId) =>{
 }
 
 const _insertFurnitureTag = async(connection,data,houseId)=>{
-    for (i=0; i<data.length;i++){
+    if (data != null){
+        for (i=0; i<data.length;i++){
+            const sqlIn = "INSERT INTO furniture_list(house_id,furniture_tag_id) VALUES (?,?);"
+            const valueIn = [houseId,data[i]];
+            await Pool.query(connection,sqlIn,valueIn);
+        }
+    } else {
         const sqlIn = "INSERT INTO furniture_list(house_id,furniture_tag_id) VALUES (?,?);"
-        const valueIn = [houseId,data[i]];
+        const valueIn = [houseId,16];
         await Pool.query(connection,sqlIn,valueIn);
     }
 }
@@ -108,9 +122,15 @@ const _insertHouseDetail = async(connection,data,houseId)=>{
 }
 
 const _insertRentTag = async(connection,data,houseId) =>{
-    for (i=0; i<data.length;i++){
+    if (data != null){
+        for (i=0; i<data.length;i++){
+            const sqlIn = "INSERT INTO renttag_list(house_id,renttag_id) VALUES (?,?);"
+            const valueIn = [houseId,data[i]];
+            await Pool.query(connection,sqlIn,valueIn);
+        }
+    } else {
         const sqlIn = "INSERT INTO renttag_list(house_id,renttag_id) VALUES (?,?);"
-        const valueIn = [houseId,data[i]];
+        const valueIn = [houseId,9];
         await Pool.query(connection,sqlIn,valueIn);
     }
 }

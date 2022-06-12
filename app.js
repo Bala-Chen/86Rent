@@ -16,10 +16,16 @@ const swaggerDocument = require('./swagger.json');
 const options = {
     swaggerDefinition: swaggerDocument,
     apis: ['./controllers/routes/*.js']
-  };
+};
+const swaggerOpt = {
+    swaggerOptions: {
+      tryItOutEnabled: false,
+      supportedSubmitMethods: [''],
+    }
+};
 const specs = swaggerJsdoc(options);
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs,swaggerOpt));
 app.set('view engine', 'ejs');
 app.use('/public', express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));

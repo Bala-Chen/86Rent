@@ -632,6 +632,12 @@ button{
     vertical-align:baseline;
     border-style: none;
 }
+.err-msg{
+    color: #CD4848;
+    margin-bottom: 15px;
+    align-self: flex-end;
+    margin-right: 15px;
+}
 
 /* member page */
 .top-flex{
@@ -1759,6 +1765,13 @@ button{
     top: 9px;
     left: 7px;
 }
+
+.gray-sm-p{
+    font-size: 12px;
+    margin-bottom: 23px;
+    color: #999999;
+}
+
 
 @media screen and (min-width: 768px) and (max-width:1200px){
     .fixed-width{

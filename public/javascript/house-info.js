@@ -82,11 +82,17 @@ function topRightInfo(data){
     const houseH2 = document.createElement('h2');
     houseH2.textContent = data.houseName;
     const houseTagUl = document.createElement('ul');
-    for (i=0;i<data.tag.length;i++){
+    if (data.tag.length == 1 && data.tag[0] == "無"){
         const houseTagli = document.createElement('li');
-        houseTagli.textContent = data.tag[i]
+        houseTagli.style.backgroundColor = "#FFFFFF"
         houseTagUl.appendChild(houseTagli)
-    };
+    } else {
+        for (i=0;i<data.tag.length;i++){
+            const houseTagli = document.createElement('li');
+            houseTagli.textContent = data.tag[i]
+            houseTagUl.appendChild(houseTagli)
+        };
+    }
     const houseH4 = document.createElement('h4');
     houseH4.textContent = data.roomName +' ｜ ' +data.pingNum+'坪 ｜ '+data.houseFloor+'F';
     const houseP = document.createElement('p');

@@ -33,7 +33,7 @@
                     <span>></span>
                     <a href="/landlordmember/addhouse">新增租屋</a>
                 </div>
-                <form class="addhouse-form" method="post" action="../landlordApi/house" enctype="multipart/form-data">
+                <form class="addhouse-form" onsubmit="updateValue(event)">
                     <h2>房屋負責人資訊</h2>
                     <div class="person-info">
                         <table>
@@ -41,7 +41,7 @@
                                 <th><label for="responsible-person">負責人</label></th>
                                 <td>
                                     <select class="select-identity" name="responsiblePerson" id="responsible-person" required>
-                                        <option value="0" style="display: none;">請選擇項目</option>
+                                        <option value="" style="display: none;">請選擇項目</option>
                                         <option value="1">屋主</option>
                                         <option value="2">代理人</option>
                                     </select>
@@ -173,8 +173,8 @@
                             <tr>
                                 <th><label>租屋地址</label></th>
                                 <td>
-                                    <select class="select-house-city" name="selectHouseCity" required>
-                                        <option value="0" style="display: none;">請選擇租屋所在縣市</option>
+                                    <select class="select-house-city" name="selectHouseCity" id="select-house-city" required>
+                                        <option value="" style="display: none;">請選擇租屋所在縣市</option>
                                         <optgroup label="北部">
                                             <option value=1>台北市</option>
                                             <option value=2>新北市</option>
@@ -208,7 +208,7 @@
                                             <option value=22>連江縣</option>
                                         </optgroup>
                                     </select>
-                                    <input type="text" name="newHouseAddress" size=67 placeholder="請輸入租屋地址(ex:信義區信義路五段...)" required>
+                                    <input type="text" name="newHouseAddress" id="new-house-address" size=67 placeholder="請輸入租屋地址(ex:信義區信義路五段...)" required>
                                 </td>
                             </tr>
                             <tr>
@@ -276,18 +276,18 @@
                             <tr>
                                 <th><label>房屋格局</label></th>
                                 <td>
-                                    <input type="number" name="roomNum" style="width: 100px;" min="0" max="99" placeholder="房數">
+                                    <input type="number" name="roomNum" id="room-num" style="width: 100px;" min="0" max="99" placeholder="房數">
                                     <span>房</span>
-                                    <input type="number" name="livingroomNum" style="width: 100px;" min="0" max="99" placeholder="廳數">
+                                    <input type="number" name="livingroomNum" id="livingroom-num" style="width: 100px;" min="0" max="99" placeholder="廳數">
                                     <span>廳</span>
-                                    <input type="number" name="bathroomNum" style="width: 100px;" min="0" max="99" placeholder="衛浴數">
+                                    <input type="number" name="bathroomNum" id="bathroom-num" style="width: 100px;" min="0" max="99" placeholder="衛浴數">
                                     <span>衛</span>
                                 </td>
                             </tr>
                             <tr>
                                 <th><label>房屋租金</label></th>
                                 <td>
-                                    <input type="number" name="rentPrice" min="0" placeholder="請輸入租金">
+                                    <input type="number" name="rentPrice" id="rent-price" min="0" placeholder="請輸入租金">
                                     <span>元 / 月</span>
                                 </td>
                             </tr>
@@ -325,8 +325,8 @@
                             <tr>
                                 <th><label for="rent-year">最短租期</label></th>
                                 <td>
-                                    <select class="select-identity" name="rentYear" required>
-                                        <option value="0" style="display: none;">請選擇項目</option>
+                                    <select class="select-identity" name="rentYear" id="select-identity" required>
+                                        <option value="" style="display: none;">請選擇項目</option>
                                         <option value=3>三個月</option>
                                         <option value=6>半年</option>
                                         <option value=12>一年</option>
@@ -337,18 +337,18 @@
                             <tr>
                                 <th><label>開伙</label></th>
                                 <td>
-                                    <input type="radio" name="cooking" value=1 checked>
+                                    <input type="radio" name="cooking" id="no-cooking" value=1 checked>
                                     <span>不開伙</span>
-                                    <input type="radio" name="cooking" value=2>
+                                    <input type="radio" name="cooking" id="ok-cooking" value=2>
                                     <span>開伙</span>
                                 </td>
                             </tr>
                             <tr>
                                 <th><label>養寵物</label></th>
                                 <td>
-                                    <input type="radio" name="pet" value=1 checked>
+                                    <input type="radio" name="pet" id="no-pet" value=1 checked>
                                     <span>不可</span>
-                                    <input type="radio" name="pet" value=2>
+                                    <input type="radio" name="pet" id="ok-pet" value=2>
                                     <span>可</span>
                                 </td>
                             </tr>
@@ -530,28 +530,28 @@
                             <tr>
                                 <th><label>產權登記</label></th>
                                 <td>
-                                    <input type="radio" name="houseRights" value=1 checked>
+                                    <input type="radio" name="houseRights" id="no-rights" value=1 checked>
                                     <span>未辦理</span>
-                                    <input type="radio" name="houseRights" value=2>
+                                    <input type="radio" name="houseRights" id="ok-rights" value=2>
                                     <span>有辦理</span>
                                 </td>
                             </tr>
                             <tr>
                                 <th><label>房屋朝向</label></th>
                                 <td>
-                                    <input type="text" name="houseDirection" placeholder="ex:坐南朝北" required> 
+                                    <input type="text" name="houseDirection" id="house-direction" placeholder="ex:坐南朝北" required> 
                                 </td>
                             </tr>
                             <tr>
                                 <th><label>法定用途</label></th>
                                 <td>
-                                    <input type="text" name="conditions" placeholder="ex:住宅用,商業用..." required> 
+                                    <input type="text" name="conditions" id="house-use" placeholder="ex:住宅用,商業用..." required> 
                                 </td>
                             </tr>
                             <tr>
                                 <th><label>建物面積</label></th>
                                 <td>
-                                    <input type="number" name="houseArea" min="0.00" step="0.01" placeholder="單位：平方公尺" required> 
+                                    <input type="number" name="houseArea" id="house-area" min="0.00" step="0.01" placeholder="單位：平方公尺" required> 
                                 </td>
                             </tr>
                         </table>
@@ -562,7 +562,7 @@
                             <tr>
                                 <th><label>照片上傳</label></th>
                                 <td>
-                                    
+                                    <p class="gray-sm-p">(至少上傳一張圖片)</p>
                                 </td>
                             </tr>
                             <tr>
@@ -571,7 +571,7 @@
                                     <div class="group-imgs">
                                         <div>
                                             <label class="upload_cover " for="upload_input1">
-                                                <input class="upload_input" id="upload_input1" type="file" name="img" required>
+                                                <input class="upload_input" id="upload_input1" type="file" name="img">
                                                 <span class="upload_icon" id="upload_icon1">
                                                     <p id="upload-p1">+</p>
                                                     <img id="upload-img1" src="">
@@ -625,18 +625,30 @@
                             <tr>
                                 <th><label>現況描述</label></th>
                                 <td>
-                                    <textarea name="commentArea" rows="5" cols="50" placeholder="請最多填寫250個字元" maxlength="250"></textarea>
+                                    <textarea name="commentArea" id="remark" rows="5" cols="50" placeholder="請最多填寫250個字元" maxlength="250"></textarea>
                                 </td>
                             </tr>
                         </table>
                     </div>
                     <div class="addhouse-submit">
+                        <div class="err-msg" id="err-msg"></div>
                         <input type="submit" id="form-submit" value="上架租屋">
                     </div>
                 </form>
             </div>
         </div>
     </main>
+        <section id="section-detail">
+        <div class="gray-block" id="gray-block"></div>
+        <div class="reserve-ok-msg" id="addhouse-success-msg">
+            <img src="/public/images/payok.png">
+            <h3>新增成功</h3>
+            <div class="reserve-two-btn">
+                <button class="gray-btn" id="go-member-btn">返回會員頁</button>
+                <button class="mi-dark-green-btn" id="go-houseinfo-btn">前往商品頁面</button>
+            </div>
+        </div>
+    </section>
     <footer>
         <div class="footer-block center-vertical">
             <h3>Copyright © 2022 by 86Rent. All Rights reserved.</h3>

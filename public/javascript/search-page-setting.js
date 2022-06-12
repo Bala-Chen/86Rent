@@ -64,10 +64,16 @@ function createItemBlock(data){
         const houseH2 = document.createElement('h2');
         houseH2.textContent = data[i].houseName;
         const houseTagUl = document.createElement('ul');
-        for (j=0;j<data[i].tag.length;j++){
+        if (data[i].tag.length == 1 && data[i].tag[0] == "無"){
             const houseTagli = document.createElement('li');
-            houseTagli.textContent = data[i].tag[j]
+            houseTagli.style.backgroundColor = "#FFFFFF"
             houseTagUl.appendChild(houseTagli)
+        } else {
+            for (j=0;j<data[i].tag.length;j++){
+                const houseTagli = document.createElement('li');
+                houseTagli.textContent = data[i].tag[j]
+                houseTagUl.appendChild(houseTagli)
+            }
         };
         const houseH4 = document.createElement('h4');
         houseH4.textContent = data[i].roomName +' ｜ ' +data[i].pingNum+'坪 ｜ '+data[i].houseFloor+'F';
