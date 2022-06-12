@@ -26,7 +26,6 @@ function getValue(){
         return res.json()
     })
     .then((resJson)=>{
-        console.log(resJson)
         //person
         document.getElementById('responsible-person').value = resJson.data.contactPerson
         document.getElementById('responsible-person-firstname').value = resJson.data.firstName
