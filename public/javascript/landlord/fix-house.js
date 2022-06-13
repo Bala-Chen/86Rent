@@ -142,16 +142,16 @@ function updateValue(e){
     },2000)
     const houseID = window.location.href.split('/')[window.location.href.split('/').length-1];
     const gender = radioValue('gender');
-    const houseTag = checkBoxValue('housetag')
-    const buildingType = radioValue('buildingType');;
+    const houseTag = checkBoxValue('housetag',15);
+    const buildingType = radioValue('buildingType');
     const roomType = radioValue('roomType');
     const houseDeposit = radioValue('houseDeposit');
     const managementFee = radioValue('managementFee');
     const cooking = radioValue('cooking') ;
     const pet = radioValue('pet');
     const rentLimit = radioValue('rentLimit');
-    const furnitureTag = checkBoxValue('furnituretag');
-    const rentTag = checkBoxValue('renttag')
+    const furnitureTag = checkBoxValue('furnituretag',16);
+    const rentTag = checkBoxValue('renttag',9)
     const houseRights = radioValue('houseRights');
 
     const data = {
@@ -225,13 +225,17 @@ function radioValue(idName){
     return value
 }
 
-function checkBoxValue(idName){
+function checkBoxValue(idName,noDataId){
     let originValues = document.getElementsByName(idName);
     let arr = [];
     for(i=0;i<originValues.length;i++){
         if(originValues[i].checked){
             arr.push(originValues[i].value)
         }
+    }
+    if (arr.length == 0){
+        arr.push(noDataId)
+        return arr
     }
     return arr
 }

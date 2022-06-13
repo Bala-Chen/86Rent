@@ -27,16 +27,17 @@ Creditcard CVV: 123 <br>
 - Docker
 - MySQL
 - AWS EC2
+- AWS S3
+- AWS cloudfront
 - Redis
 
 ### Frontend
 - HTML5
 - CSS3
 - javascript
-- bootstrap
 
 ## Backend plugins
-- Express
+- Express.js
 - Google reCAPTCHA v2
 - TapPay
 
