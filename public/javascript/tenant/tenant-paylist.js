@@ -65,7 +65,7 @@ function createLandlordBillList(data){
         listInfoBtn.className = "priceinfo-btn";
         listInfoBtn.id=data[i].billId+"-detail-btn"
         listInfoBtn.textContent = "房租細項";
-        listInfoBtn.addEventListener('click',clickDetailBtn) //display設定
+        listInfoBtn.addEventListener('click',clickDetailBtn)
         listInfoBtnSpan.appendChild(listInfoBtn)
         const listFixPriceSpan = document.createElement('span');
         listFixPriceSpan.className = "paylist-minsize";
@@ -76,7 +76,7 @@ function createLandlordBillList(data){
             listFixPriceBtn.className = "gopay-btn";
             listFixPriceBtn.id=data[i].billId+"-paypage-btn"
             listFixPriceBtn.textContent = "繳款";
-            listFixPriceBtn.addEventListener('click',goPagPage)
+            listFixPriceBtn.addEventListener('click',goPayPage)
             listFixPriceSpan.appendChild(listFixPriceBtn)
         } else {
             listItem.className = "pay-ok-block";
@@ -260,6 +260,8 @@ function createBillDetail(data){
             const checkokBtn = document.createElement('button');
             checkokBtn.className = "sm-dark-green-btn";
             checkokBtn.textContent = "前往繳款";
+            checkokBtn.id = data[i].billId+"-gopay-button"
+            checkokBtn.addEventListener('click',goPayPage)
             detailTwoBtn.appendChild(checkokBtn);
         }
         detailTwoBtn.appendChild(cancelBtn);    
@@ -318,8 +320,13 @@ function clickDetailBtn(){
     })
 }
 
-function goPagPage(){
-    const getBillId = this.id.split('-paypage-btn')[0];
+function goPayPage(){
+    let getBillId;
+    if (this.id.includes("btn")){
+        getBillId = this.id.split('-paypage-btn')[0];
+    } else {
+        getBillId = this.id.split('-gopay-button')[0];
+    }
     const houseId = window.location.href.split('/')[window.location.href.split('/').length-1]
     location.replace('/tenantmember/pay/'+houseId+'/'+getBillId)
 }

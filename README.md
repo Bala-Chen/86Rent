@@ -42,7 +42,7 @@ Creditcard CVV: 123 <br>
 - TapPay
 
 ## Backend Architecture
-![Imgur](https://i.imgur.com/g7CxZbp.png)
+![Imgur](https://i.imgur.com/nMM0hjH.png)
 
 ## Database Architecture
 ![Imgur](https://i.imgur.com/G075d7M.png)
