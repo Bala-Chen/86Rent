@@ -47,6 +47,9 @@ Creditcard CVV: 123 <br>
 ## Database Architecture
 ![Imgur](https://i.imgur.com/G075d7M.png)
 
+## API Naming Style
+### https://86-rent.com/api-docs/
+
 ## Features
 
 ### Index search
