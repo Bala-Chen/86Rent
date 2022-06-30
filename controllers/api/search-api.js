@@ -65,36 +65,36 @@ async function getAllResult(value,recent,rentUp,roomSum,addsql){
         sql = "SELECT housing_info.house_id,contact_name,call_name,house_name,room_name,ping_number,house_floor,house_address,room_num,livingroom_num,bathroom_num,tag,rent_price,img_url \
         FROM housing_info \
         JOIN room ON room_type = room_id \
-        JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact ON contact.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img ON img.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list ON tag_list.house_id = housing_info.house_id "
+        NATURAL JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact \
+        NATURAL JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img \
+        NATURAL JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list "
         + " WHERE " + addsql + " AND rental_status = '未出租' \
         ORDER BY insert_timestamp DESC LIMIT ?,8;";
     } else if (rentUp == "true"){
         sql = "SELECT housing_info.house_id,contact_name,call_name,house_name,room_name,ping_number,house_floor,house_address,room_num,livingroom_num,bathroom_num,tag,rent_price,img_url \
         FROM housing_info \
         JOIN room ON room_type = room_id \
-        JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact ON contact.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img ON img.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list ON tag_list.house_id = housing_info.house_id "
+        NATURAL JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact  \
+        NATURAL JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img  \
+        NATURAL JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list "
         + " WHERE " + addsql + " AND rental_status = '未出租' \
          ORDER BY rent_price LIMIT ?,8;";
     } else if (roomSum == "true"){
         sql = "SELECT housing_info.house_id,contact_name,call_name,house_name,room_name,ping_number,house_floor,house_address,room_num,livingroom_num,bathroom_num,tag,rent_price,img_url \
         FROM housing_info \
         JOIN room ON room_type = room_id \
-        JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact ON contact.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img ON img.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list ON tag_list.house_id = housing_info.house_id "
+        NATURAL JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact \
+        NATURAL JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img \
+        NATURAL JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list "
         + " WHERE " + addsql + " AND rental_status = '未出租' \
          ORDER BY room_num DESC LIMIT ?,8;";
     } else {
         sql = "SELECT housing_info.house_id,contact_name,call_name,house_name,room_name,ping_number,house_floor,house_address,room_num,livingroom_num,bathroom_num,tag,rent_price,img_url \
         FROM housing_info \
         JOIN room ON room_type = room_id \
-        JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact ON contact.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img ON img.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list ON tag_list.house_id = housing_info.house_id"
+        NATURAL JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact  \
+        NATURAL JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img  \
+        NATURAL JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list"
         + " WHERE " + addsql + " AND rental_status = '未出租' \
          LIMIT ?,8";
     }
@@ -119,9 +119,9 @@ async function getCityLimitResult(city,value,recent,rentUp,roomSum,addsql){
         FROM housing_info \
         JOIN room ON room_type = room_id \
         JOIN taiwan_city ON city_id = house_city \
-        JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact ON contact.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img ON img.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list ON tag_list.house_id = housing_info.house_id \
+        NATURAL JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact  \
+        NATURAL JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img \
+        NATURAL JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list  \
         WHERE city_name = ? AND "+ addsql + " AND rental_status = '未出租' \
         ORDER BY insert_timestamp DESC LIMIT ?,8;"
     } else if (rentUp == "true"){
@@ -129,9 +129,9 @@ async function getCityLimitResult(city,value,recent,rentUp,roomSum,addsql){
         FROM housing_info \
         JOIN room ON room_type = room_id \
         JOIN taiwan_city ON city_id = house_city \
-        JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact ON contact.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img ON img.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list ON tag_list.house_id = housing_info.house_id \
+        NATURAL JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact  \
+        NATURAL JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img \
+        NATURAL JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list \
         WHERE city_name = ? AND "+ addsql + " AND rental_status = '未出租' \
         ORDER BY rent_price LIMIT ?,8;"
     } else if (roomSum == "true"){
@@ -139,9 +139,9 @@ async function getCityLimitResult(city,value,recent,rentUp,roomSum,addsql){
         FROM housing_info \
         JOIN room ON room_type = room_id \
         JOIN taiwan_city ON city_id = house_city \
-        JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact ON contact.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img ON img.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list ON tag_list.house_id = housing_info.house_id \
+        NATURAL JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact \
+        NATURAL JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img \
+        NATURAL JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list \
         WHERE city_name = ? AND "+ addsql + " AND rental_status = '未出租' \
         ORDER BY room_num DESC LIMIT ?,8;"
     } else {
@@ -149,9 +149,9 @@ async function getCityLimitResult(city,value,recent,rentUp,roomSum,addsql){
         FROM housing_info \
         JOIN room ON room_type = room_id \
         JOIN taiwan_city ON city_id = house_city \
-        JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact ON contact.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img ON img.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list ON tag_list.house_id = housing_info.house_id \
+        NATURAL JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact \
+        NATURAL JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img \
+        NATURAL JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list  \
         WHERE city_name = ? AND "+ addsql + " AND rental_status = '未出租' \
         LIMIT ?,8;"
     }
@@ -177,9 +177,9 @@ async function getKeywordLimitResult(keyword,value,recent,rentUp,roomSum,addsql)
         FROM housing_info \
         JOIN room ON room_type = room_id \
         JOIN taiwan_city ON city_id = house_city \
-        JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact ON contact.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img ON img.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list ON tag_list.house_id = housing_info.house_id \
+        NATURAL JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact \
+        NATURAL JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img \
+        NATURAL JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list  \
         WHERE (locate(?,house_name) or locate(?,house_address)) AND "+ addsql +" AND rental_status = '未出租' \
         ORDER BY insert_timestamp DESC LIMIT ?,8;";
     } else if (rentUp == "true"){
@@ -187,9 +187,9 @@ async function getKeywordLimitResult(keyword,value,recent,rentUp,roomSum,addsql)
         FROM housing_info \
         JOIN room ON room_type = room_id \
         JOIN taiwan_city ON city_id = house_city \
-        JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact ON contact.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img ON img.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list ON tag_list.house_id = housing_info.house_id \
+        NATURAL JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact \
+        NATURAL JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img \
+        NATURAL JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list \
         WHERE (locate(?,house_name) or locate(?,house_address)) AND "+ addsql +" AND rental_status = '未出租' \
         ORDER BY rent_price LIMIT ?,8;";
     } else if (roomSum == "true"){
@@ -197,9 +197,9 @@ async function getKeywordLimitResult(keyword,value,recent,rentUp,roomSum,addsql)
         FROM housing_info \
         JOIN room ON room_type = room_id \
         JOIN taiwan_city ON city_id = house_city \
-        JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact ON contact.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img ON img.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list ON tag_list.house_id = housing_info.house_id \
+        NATURAL JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact \
+        NATURAL JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img \
+        NATURAL JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list \
         WHERE (locate(?,house_name) or locate(?,house_address)) AND "+ addsql +" AND rental_status = '未出租' \
         ORDER BY room_num DESC LIMIT ?,8;";
     } else {
@@ -207,9 +207,9 @@ async function getKeywordLimitResult(keyword,value,recent,rentUp,roomSum,addsql)
         FROM housing_info \
         JOIN room ON room_type = room_id \
         JOIN taiwan_city ON city_id = house_city \
-        JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact ON contact.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img ON img.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list ON tag_list.house_id = housing_info.house_id \
+        NATURAL JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact \
+        NATURAL JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img \
+        NATURAL JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list \
         WHERE (locate(?,house_name) or locate(?,house_address)) AND "+ addsql +" AND rental_status = '未出租' \
         LIMIT ?,8;";
     }
@@ -235,9 +235,9 @@ async function getCityKeywordResult(city,keyword,value,recent,rentUp,roomSum,add
         FROM housing_info \
         JOIN room ON room_type = room_id \
         JOIN taiwan_city ON city_id = house_city \
-        JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact ON contact.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img ON img.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list ON tag_list.house_id = housing_info.house_id \
+        NATURAL JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact \
+        NATURAL JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img \
+        NATURAL JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list \
         WHERE city_name = ? AND (locate(?,house_name) or locate(?,house_address)) AND "+ addsql +" AND rental_status = '未出租' \
         ORDER BY insert_timestamp DESC LIMIT ?,8;"
     } else if(rentUp == "true"){
@@ -245,9 +245,9 @@ async function getCityKeywordResult(city,keyword,value,recent,rentUp,roomSum,add
         FROM housing_info \
         JOIN room ON room_type = room_id \
         JOIN taiwan_city ON city_id = house_city \
-        JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact ON contact.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img ON img.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list ON tag_list.house_id = housing_info.house_id \
+        NATURAL JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact \
+        NATURAL JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img \
+        NATURAL JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list \
         WHERE city_name = ? AND (locate(?,house_name) or locate(?,house_address)) AND "+ addsql +" AND rental_status = '未出租' \
         ORDER BY rent_price LIMIT ?,8;"
     } else if(roomSum == "true"){
@@ -255,9 +255,9 @@ async function getCityKeywordResult(city,keyword,value,recent,rentUp,roomSum,add
         FROM housing_info \
         JOIN room ON room_type = room_id \
         JOIN taiwan_city ON city_id = house_city \
-        JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact ON contact.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img ON img.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list ON tag_list.house_id = housing_info.house_id \
+        NATURAL JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact \
+        NATURAL JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img \
+        NATURAL JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list \
         WHERE city_name = ? AND (locate(?,house_name) or locate(?,house_address)) AND "+ addsql +" AND rental_status = '未出租' \
         ORDER BY room_num DESC LIMIT ?,8;"
     } else {
@@ -265,9 +265,9 @@ async function getCityKeywordResult(city,keyword,value,recent,rentUp,roomSum,add
         FROM housing_info \
         JOIN room ON room_type = room_id \
         JOIN taiwan_city ON city_id = house_city \
-        JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact ON contact.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img ON img.house_id = housing_info.house_id \
-        JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list ON tag_list.house_id = housing_info.house_id \
+        NATURAL JOIN (SELECT house_id,contact_name,call_name FROM housing_contact JOIN contact_person ON housing_contact.contact_person = contact_person.contact_id) AS contact \
+        NATURAL JOIN (SELECT house_id,img_url FROM house_img GROUP BY house_id) AS img \
+        NATURAL JOIN (SELECT house_id,GROUP_CONCAT(housetag_name) as tag FROM housetag_list JOIN housetag ON housetag.housetag_id = housetag_list.tag_id GROUP BY house_id) AS tag_list \
         WHERE city_name = ? AND (locate(?,house_name) or locate(?,house_address)) AND "+ addsql +" AND rental_status = '未出租' \
         LIMIT ?,8;"
     }
